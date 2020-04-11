@@ -1,0 +1,616 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4EBFFB9E244239EB00B7D3CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFB9D244239EB00B7D3CE /* AppDelegate.swift */; };
+		4EBFFBA0244239EB00B7D3CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFB9F244239EB00B7D3CE /* SceneDelegate.swift */; };
+		4EBFFBA3244239EB00B7D3CE /* VehicleRental.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBA1244239EB00B7D3CE /* VehicleRental.xcdatamodeld */; };
+		4EBFFBA5244239EB00B7D3CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBA4244239EB00B7D3CE /* ContentView.swift */; };
+		4EBFFBA7244239EE00B7D3CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFBA6244239EE00B7D3CE /* Assets.xcassets */; };
+		4EBFFBAA244239EE00B7D3CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFBA9244239EE00B7D3CE /* Preview Assets.xcassets */; };
+		4EBFFBAD244239EE00B7D3CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFBAB244239EE00B7D3CE /* LaunchScreen.storyboard */; };
+		4EBFFBB8244239EE00B7D3CE /* VehicleRentalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBB7244239EE00B7D3CE /* VehicleRentalTests.swift */; };
+		4EBFFBC3244239EE00B7D3CE /* VehicleRentalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBC2244239EE00B7D3CE /* VehicleRentalUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4EBFFBB4244239EE00B7D3CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EBFFB92244239EB00B7D3CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4EBFFB99244239EB00B7D3CE;
+			remoteInfo = VehicleRental;
+		};
+		4EBFFBBF244239EE00B7D3CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EBFFB92244239EB00B7D3CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4EBFFB99244239EB00B7D3CE;
+			remoteInfo = VehicleRental;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4EBFFB9A244239EB00B7D3CE /* VehicleRental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VehicleRental.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EBFFB9D244239EB00B7D3CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4EBFFB9F244239EB00B7D3CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4EBFFBA2244239EB00B7D3CE /* VehicleRental.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VehicleRental.xcdatamodel; sourceTree = "<group>"; };
+		4EBFFBA4244239EB00B7D3CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4EBFFBA6244239EE00B7D3CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4EBFFBA9244239EE00B7D3CE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4EBFFBAC244239EE00B7D3CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4EBFFBAE244239EE00B7D3CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EBFFBB3244239EE00B7D3CE /* VehicleRentalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VehicleRentalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EBFFBB7244239EE00B7D3CE /* VehicleRentalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleRentalTests.swift; sourceTree = "<group>"; };
+		4EBFFBB9244239EE00B7D3CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EBFFBBE244239EE00B7D3CE /* VehicleRentalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VehicleRentalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EBFFBC2244239EE00B7D3CE /* VehicleRentalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleRentalUITests.swift; sourceTree = "<group>"; };
+		4EBFFBC4244239EE00B7D3CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4EBFFB97244239EB00B7D3CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EBFFBB0244239EE00B7D3CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EBFFBBB244239EE00B7D3CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4EBFFB91244239EB00B7D3CE = {
+			isa = PBXGroup;
+			children = (
+				4EBFFB9C244239EB00B7D3CE /* VehicleRental */,
+				4EBFFBB6244239EE00B7D3CE /* VehicleRentalTests */,
+				4EBFFBC1244239EE00B7D3CE /* VehicleRentalUITests */,
+				4EBFFB9B244239EB00B7D3CE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4EBFFB9B244239EB00B7D3CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFB9A244239EB00B7D3CE /* VehicleRental.app */,
+				4EBFFBB3244239EE00B7D3CE /* VehicleRentalTests.xctest */,
+				4EBFFBBE244239EE00B7D3CE /* VehicleRentalUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4EBFFB9C244239EB00B7D3CE /* VehicleRental */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFB9D244239EB00B7D3CE /* AppDelegate.swift */,
+				4EBFFB9F244239EB00B7D3CE /* SceneDelegate.swift */,
+				4EBFFBA4244239EB00B7D3CE /* ContentView.swift */,
+				4EBFFBA6244239EE00B7D3CE /* Assets.xcassets */,
+				4EBFFBAB244239EE00B7D3CE /* LaunchScreen.storyboard */,
+				4EBFFBAE244239EE00B7D3CE /* Info.plist */,
+				4EBFFBA1244239EB00B7D3CE /* VehicleRental.xcdatamodeld */,
+				4EBFFBA8244239EE00B7D3CE /* Preview Content */,
+			);
+			path = VehicleRental;
+			sourceTree = "<group>";
+		};
+		4EBFFBA8244239EE00B7D3CE /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFBA9244239EE00B7D3CE /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4EBFFBB6244239EE00B7D3CE /* VehicleRentalTests */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFBB7244239EE00B7D3CE /* VehicleRentalTests.swift */,
+				4EBFFBB9244239EE00B7D3CE /* Info.plist */,
+			);
+			path = VehicleRentalTests;
+			sourceTree = "<group>";
+		};
+		4EBFFBC1244239EE00B7D3CE /* VehicleRentalUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFBC2244239EE00B7D3CE /* VehicleRentalUITests.swift */,
+				4EBFFBC4244239EE00B7D3CE /* Info.plist */,
+			);
+			path = VehicleRentalUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4EBFFB99244239EB00B7D3CE /* VehicleRental */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EBFFBC7244239EE00B7D3CE /* Build configuration list for PBXNativeTarget "VehicleRental" */;
+			buildPhases = (
+				4EBFFB96244239EB00B7D3CE /* Sources */,
+				4EBFFB97244239EB00B7D3CE /* Frameworks */,
+				4EBFFB98244239EB00B7D3CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VehicleRental;
+			productName = VehicleRental;
+			productReference = 4EBFFB9A244239EB00B7D3CE /* VehicleRental.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4EBFFBB2244239EE00B7D3CE /* VehicleRentalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EBFFBCA244239EE00B7D3CE /* Build configuration list for PBXNativeTarget "VehicleRentalTests" */;
+			buildPhases = (
+				4EBFFBAF244239EE00B7D3CE /* Sources */,
+				4EBFFBB0244239EE00B7D3CE /* Frameworks */,
+				4EBFFBB1244239EE00B7D3CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4EBFFBB5244239EE00B7D3CE /* PBXTargetDependency */,
+			);
+			name = VehicleRentalTests;
+			productName = VehicleRentalTests;
+			productReference = 4EBFFBB3244239EE00B7D3CE /* VehicleRentalTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4EBFFBBD244239EE00B7D3CE /* VehicleRentalUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EBFFBCD244239EE00B7D3CE /* Build configuration list for PBXNativeTarget "VehicleRentalUITests" */;
+			buildPhases = (
+				4EBFFBBA244239EE00B7D3CE /* Sources */,
+				4EBFFBBB244239EE00B7D3CE /* Frameworks */,
+				4EBFFBBC244239EE00B7D3CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4EBFFBC0244239EE00B7D3CE /* PBXTargetDependency */,
+			);
+			name = VehicleRentalUITests;
+			productName = VehicleRentalUITests;
+			productReference = 4EBFFBBE244239EE00B7D3CE /* VehicleRentalUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4EBFFB92244239EB00B7D3CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Michał Dziewulski";
+				TargetAttributes = {
+					4EBFFB99244239EB00B7D3CE = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					4EBFFBB2244239EE00B7D3CE = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 4EBFFB99244239EB00B7D3CE;
+					};
+					4EBFFBBD244239EE00B7D3CE = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 4EBFFB99244239EB00B7D3CE;
+					};
+				};
+			};
+			buildConfigurationList = 4EBFFB95244239EB00B7D3CE /* Build configuration list for PBXProject "VehicleRental" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4EBFFB91244239EB00B7D3CE;
+			productRefGroup = 4EBFFB9B244239EB00B7D3CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4EBFFB99244239EB00B7D3CE /* VehicleRental */,
+				4EBFFBB2244239EE00B7D3CE /* VehicleRentalTests */,
+				4EBFFBBD244239EE00B7D3CE /* VehicleRentalUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4EBFFB98244239EB00B7D3CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EBFFBAD244239EE00B7D3CE /* LaunchScreen.storyboard in Resources */,
+				4EBFFBAA244239EE00B7D3CE /* Preview Assets.xcassets in Resources */,
+				4EBFFBA7244239EE00B7D3CE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EBFFBB1244239EE00B7D3CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EBFFBBC244239EE00B7D3CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4EBFFB96244239EB00B7D3CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EBFFB9E244239EB00B7D3CE /* AppDelegate.swift in Sources */,
+				4EBFFBA0244239EB00B7D3CE /* SceneDelegate.swift in Sources */,
+				4EBFFBA5244239EB00B7D3CE /* ContentView.swift in Sources */,
+				4EBFFBA3244239EB00B7D3CE /* VehicleRental.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EBFFBAF244239EE00B7D3CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EBFFBB8244239EE00B7D3CE /* VehicleRentalTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EBFFBBA244239EE00B7D3CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EBFFBC3244239EE00B7D3CE /* VehicleRentalUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4EBFFBB5244239EE00B7D3CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4EBFFB99244239EB00B7D3CE /* VehicleRental */;
+			targetProxy = 4EBFFBB4244239EE00B7D3CE /* PBXContainerItemProxy */;
+		};
+		4EBFFBC0244239EE00B7D3CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4EBFFB99244239EB00B7D3CE /* VehicleRental */;
+			targetProxy = 4EBFFBBF244239EE00B7D3CE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4EBFFBAB244239EE00B7D3CE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4EBFFBAC244239EE00B7D3CE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4EBFFBC5244239EE00B7D3CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4EBFFBC6244239EE00B7D3CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4EBFFBC8244239EE00B7D3CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"VehicleRental/Preview Content\"";
+				DEVELOPMENT_TEAM = MLWVFW33RV;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = VehicleRental/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdevv.VehicleRental;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4EBFFBC9244239EE00B7D3CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"VehicleRental/Preview Content\"";
+				DEVELOPMENT_TEAM = MLWVFW33RV;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = VehicleRental/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdevv.VehicleRental;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4EBFFBCB244239EE00B7D3CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MLWVFW33RV;
+				INFOPLIST_FILE = VehicleRentalTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdevv.VehicleRentalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VehicleRental.app/VehicleRental";
+			};
+			name = Debug;
+		};
+		4EBFFBCC244239EE00B7D3CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MLWVFW33RV;
+				INFOPLIST_FILE = VehicleRentalTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdevv.VehicleRentalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VehicleRental.app/VehicleRental";
+			};
+			name = Release;
+		};
+		4EBFFBCE244239EE00B7D3CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MLWVFW33RV;
+				INFOPLIST_FILE = VehicleRentalUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdevv.VehicleRentalUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VehicleRental;
+			};
+			name = Debug;
+		};
+		4EBFFBCF244239EE00B7D3CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MLWVFW33RV;
+				INFOPLIST_FILE = VehicleRentalUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdevv.VehicleRentalUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VehicleRental;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4EBFFB95244239EB00B7D3CE /* Build configuration list for PBXProject "VehicleRental" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EBFFBC5244239EE00B7D3CE /* Debug */,
+				4EBFFBC6244239EE00B7D3CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4EBFFBC7244239EE00B7D3CE /* Build configuration list for PBXNativeTarget "VehicleRental" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EBFFBC8244239EE00B7D3CE /* Debug */,
+				4EBFFBC9244239EE00B7D3CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4EBFFBCA244239EE00B7D3CE /* Build configuration list for PBXNativeTarget "VehicleRentalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EBFFBCB244239EE00B7D3CE /* Debug */,
+				4EBFFBCC244239EE00B7D3CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4EBFFBCD244239EE00B7D3CE /* Build configuration list for PBXNativeTarget "VehicleRentalUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EBFFBCE244239EE00B7D3CE /* Debug */,
+				4EBFFBCF244239EE00B7D3CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4EBFFBA1244239EB00B7D3CE /* VehicleRental.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4EBFFBA2244239EB00B7D3CE /* VehicleRental.xcdatamodel */,
+			);
+			currentVersion = 4EBFFBA2244239EB00B7D3CE /* VehicleRental.xcdatamodel */;
+			path = VehicleRental.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4EBFFB92244239EB00B7D3CE /* Project object */;
+}
