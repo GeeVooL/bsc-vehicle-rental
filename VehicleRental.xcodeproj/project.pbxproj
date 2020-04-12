@@ -16,6 +16,23 @@
 		4EBFFBAD244239EE00B7D3CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFBAB244239EE00B7D3CE /* LaunchScreen.storyboard */; };
 		4EBFFBB8244239EE00B7D3CE /* VehicleRentalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBB7244239EE00B7D3CE /* VehicleRentalTests.swift */; };
 		4EBFFBC3244239EE00B7D3CE /* VehicleRentalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBC2244239EE00B7D3CE /* VehicleRentalUITests.swift */; };
+		4EBFFBD42442508B00B7D3CE /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBD32442508B00B7D3CE /* Person.swift */; };
+		4EBFFBD6244256F000B7D3CE /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBD5244256F000B7D3CE /* Customer.swift */; };
+		4EBFFBD8244257ED00B7D3CE /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBD7244257ED00B7D3CE /* Employee.swift */; };
+		4EBFFBDA24425DEF00B7D3CE /* CustomerServiceEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBD924425DEF00B7D3CE /* CustomerServiceEmployee.swift */; };
+		4EBFFBDC24426AF000B7D3CE /* Technician.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBDB24426AF000B7D3CE /* Technician.swift */; };
+		4EBFFBE024426D4D00B7D3CE /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBDF24426D4D00B7D3CE /* Vehicle.swift */; };
+		4EBFFBE224427E0200B7D3CE /* CombustionEngineVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBE124427E0200B7D3CE /* CombustionEngineVehicle.swift */; };
+		4EBFFBE424427E1B00B7D3CE /* ElectricEngineVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBE324427E1B00B7D3CE /* ElectricEngineVehicle.swift */; };
+		4EBFFBE624427E3000B7D3CE /* HybridVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBE524427E3000B7D3CE /* HybridVehicle.swift */; };
+		4EBFFBE82442808A00B7D3CE /* MotorcycleVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBE72442808A00B7D3CE /* MotorcycleVehicle.swift */; };
+		4EBFFBEA2442821800B7D3CE /* AutomobileVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBE92442821800B7D3CE /* AutomobileVehicle.swift */; };
+		4EBFFBED2442826F00B7D3CE /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBEC2442826F00B7D3CE /* Service.swift */; };
+		4EBFFBEF244282C000B7D3CE /* BranchOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBEE244282C000B7D3CE /* BranchOffice.swift */; };
+		4EBFFBF1244283F500B7D3CE /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBF0244283F500B7D3CE /* Rental.swift */; };
+		4EBFFBF32442842500B7D3CE /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBF22442842500B7D3CE /* Invoice.swift */; };
+		4EBFFBF52442864300B7D3CE /* InvoiceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBF42442864300B7D3CE /* InvoiceItem.swift */; };
+		4EBFFBF8244297D400B7D3CE /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBF7244297D400B7D3CE /* Address.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +68,24 @@
 		4EBFFBBE244239EE00B7D3CE /* VehicleRentalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VehicleRentalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBFFBC2244239EE00B7D3CE /* VehicleRentalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleRentalUITests.swift; sourceTree = "<group>"; };
 		4EBFFBC4244239EE00B7D3CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EBFFBD32442508B00B7D3CE /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		4EBFFBD5244256F000B7D3CE /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		4EBFFBD7244257ED00B7D3CE /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		4EBFFBD924425DEF00B7D3CE /* CustomerServiceEmployee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerServiceEmployee.swift; sourceTree = "<group>"; };
+		4EBFFBDB24426AF000B7D3CE /* Technician.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Technician.swift; sourceTree = "<group>"; };
+		4EBFFBDF24426D4D00B7D3CE /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		4EBFFBE124427E0200B7D3CE /* CombustionEngineVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombustionEngineVehicle.swift; sourceTree = "<group>"; };
+		4EBFFBE324427E1B00B7D3CE /* ElectricEngineVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricEngineVehicle.swift; sourceTree = "<group>"; };
+		4EBFFBE524427E3000B7D3CE /* HybridVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridVehicle.swift; sourceTree = "<group>"; };
+		4EBFFBE72442808A00B7D3CE /* MotorcycleVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotorcycleVehicle.swift; sourceTree = "<group>"; };
+		4EBFFBE92442821800B7D3CE /* AutomobileVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomobileVehicle.swift; sourceTree = "<group>"; };
+		4EBFFBEC2442826F00B7D3CE /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		4EBFFBEE244282C000B7D3CE /* BranchOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchOffice.swift; sourceTree = "<group>"; };
+		4EBFFBF0244283F500B7D3CE /* Rental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rental.swift; sourceTree = "<group>"; };
+		4EBFFBF22442842500B7D3CE /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
+		4EBFFBF42442864300B7D3CE /* InvoiceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceItem.swift; sourceTree = "<group>"; };
+		4EBFFBF7244297D400B7D3CE /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		4EBFFBF92442A4CA00B7D3CE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +116,7 @@
 		4EBFFB91244239EB00B7D3CE = {
 			isa = PBXGroup;
 			children = (
+				4EBFFBF92442A4CA00B7D3CE /* README.md */,
 				4EBFFB9C244239EB00B7D3CE /* VehicleRental */,
 				4EBFFBB6244239EE00B7D3CE /* VehicleRentalTests */,
 				4EBFFBC1244239EE00B7D3CE /* VehicleRentalUITests */,
@@ -101,6 +137,9 @@
 		4EBFFB9C244239EB00B7D3CE /* VehicleRental */ = {
 			isa = PBXGroup;
 			children = (
+				4EBFFBD024424FD500B7D3CE /* Models */,
+				4EBFFBD124424FE200B7D3CE /* Views */,
+				4EBFFBD224424FE900B7D3CE /* Controllers */,
 				4EBFFB9D244239EB00B7D3CE /* AppDelegate.swift */,
 				4EBFFB9F244239EB00B7D3CE /* SceneDelegate.swift */,
 				4EBFFBA4244239EB00B7D3CE /* ContentView.swift */,
@@ -137,6 +176,76 @@
 				4EBFFBC4244239EE00B7D3CE /* Info.plist */,
 			);
 			path = VehicleRentalUITests;
+			sourceTree = "<group>";
+		};
+		4EBFFBD024424FD500B7D3CE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFBDD24426D1B00B7D3CE /* People */,
+				4EBFFBDE24426D2900B7D3CE /* Vehicles */,
+				4EBFFBEB2442824100B7D3CE /* Operations */,
+				4EBFFBF6244297BF00B7D3CE /* Utils */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4EBFFBD124424FE200B7D3CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4EBFFBD224424FE900B7D3CE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4EBFFBDD24426D1B00B7D3CE /* People */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFBD32442508B00B7D3CE /* Person.swift */,
+				4EBFFBD5244256F000B7D3CE /* Customer.swift */,
+				4EBFFBD7244257ED00B7D3CE /* Employee.swift */,
+				4EBFFBD924425DEF00B7D3CE /* CustomerServiceEmployee.swift */,
+				4EBFFBDB24426AF000B7D3CE /* Technician.swift */,
+			);
+			path = People;
+			sourceTree = "<group>";
+		};
+		4EBFFBDE24426D2900B7D3CE /* Vehicles */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFBDF24426D4D00B7D3CE /* Vehicle.swift */,
+				4EBFFBE124427E0200B7D3CE /* CombustionEngineVehicle.swift */,
+				4EBFFBE324427E1B00B7D3CE /* ElectricEngineVehicle.swift */,
+				4EBFFBE524427E3000B7D3CE /* HybridVehicle.swift */,
+				4EBFFBE72442808A00B7D3CE /* MotorcycleVehicle.swift */,
+				4EBFFBE92442821800B7D3CE /* AutomobileVehicle.swift */,
+			);
+			path = Vehicles;
+			sourceTree = "<group>";
+		};
+		4EBFFBEB2442824100B7D3CE /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFBEC2442826F00B7D3CE /* Service.swift */,
+				4EBFFBEE244282C000B7D3CE /* BranchOffice.swift */,
+				4EBFFBF0244283F500B7D3CE /* Rental.swift */,
+				4EBFFBF22442842500B7D3CE /* Invoice.swift */,
+				4EBFFBF42442864300B7D3CE /* InvoiceItem.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		4EBFFBF6244297BF00B7D3CE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4EBFFBF7244297D400B7D3CE /* Address.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,10 +379,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EBFFBD42442508B00B7D3CE /* Person.swift in Sources */,
 				4EBFFB9E244239EB00B7D3CE /* AppDelegate.swift in Sources */,
 				4EBFFBA0244239EB00B7D3CE /* SceneDelegate.swift in Sources */,
+				4EBFFBE424427E1B00B7D3CE /* ElectricEngineVehicle.swift in Sources */,
+				4EBFFBDA24425DEF00B7D3CE /* CustomerServiceEmployee.swift in Sources */,
+				4EBFFBEF244282C000B7D3CE /* BranchOffice.swift in Sources */,
+				4EBFFBF8244297D400B7D3CE /* Address.swift in Sources */,
+				4EBFFBEA2442821800B7D3CE /* AutomobileVehicle.swift in Sources */,
+				4EBFFBE224427E0200B7D3CE /* CombustionEngineVehicle.swift in Sources */,
+				4EBFFBD8244257ED00B7D3CE /* Employee.swift in Sources */,
+				4EBFFBE82442808A00B7D3CE /* MotorcycleVehicle.swift in Sources */,
+				4EBFFBED2442826F00B7D3CE /* Service.swift in Sources */,
+				4EBFFBF32442842500B7D3CE /* Invoice.swift in Sources */,
+				4EBFFBF1244283F500B7D3CE /* Rental.swift in Sources */,
+				4EBFFBD6244256F000B7D3CE /* Customer.swift in Sources */,
 				4EBFFBA5244239EB00B7D3CE /* ContentView.swift in Sources */,
 				4EBFFBA3244239EB00B7D3CE /* VehicleRental.xcdatamodeld in Sources */,
+				4EBFFBF52442864300B7D3CE /* InvoiceItem.swift in Sources */,
+				4EBFFBE624427E3000B7D3CE /* HybridVehicle.swift in Sources */,
+				4EBFFBE024426D4D00B7D3CE /* Vehicle.swift in Sources */,
+				4EBFFBDC24426AF000B7D3CE /* Technician.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
