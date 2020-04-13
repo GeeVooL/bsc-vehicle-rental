@@ -8,17 +8,19 @@
 
 import Foundation
 
-class Technician: Employee {
+final class Technician: Employee, IncludingExtension {
+    static var all = ClassExtension<Technician>()
+    
     let name: String
     let surname: String
     let birthDate: Date
-    var address: String
+    var address: Address
     var email: String
     var phone: String
     let employmentDate: Date
     var baseSalary: Decimal
     
-    init(name: String, surname: String, birthDate: Date, address: String, email: String, phone: String, employmentDate: Date, baseSalary: Decimal) {
+    init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal) {
         self.name = name
         self.surname = surname
         self.birthDate = birthDate
@@ -27,6 +29,11 @@ class Technician: Employee {
         self.phone = phone
         self.employmentDate = employmentDate
         self.baseSalary = baseSalary
+        Technician.all.add(object: self)
+    }
+    
+    deinit {
+        Technician.all.remove(object: self)
     }
     
     enum Specialization {

@@ -8,10 +8,12 @@
 
 import Foundation
 
-class HybridVehicle {
+class HybridVehicle: IncludingExtension {
     enum HybridType {
         case mild, full, plugIn
     }
+    
+    static var all = ClassExtension<HybridVehicle>()
     
     let type: HybridType
     let maxSpeedUsingElectricEngine: Float
@@ -19,5 +21,10 @@ class HybridVehicle {
     init(type: HybridVehicle.HybridType, maxSpeedUsingElectricEngine: Float) {
         self.type = type
         self.maxSpeedUsingElectricEngine = maxSpeedUsingElectricEngine
+        HybridVehicle.all.add(object: self)
+    }
+    
+    deinit {
+        HybridVehicle.all.remove(object: self)
     }
 }

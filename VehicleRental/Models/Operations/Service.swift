@@ -8,12 +8,19 @@
 
 import Foundation
 
-class Service {
+final class Service: IncludingExtension {
+    static var all = ClassExtension<Service>()
+    
     let serviceDate: Date
     let issueDescription: String
     
     init(serviceDate: Date, issueDescription: String) {
         self.serviceDate = serviceDate
         self.issueDescription = issueDescription
+        Service.all.add(object: self)
+    }
+    
+    deinit {
+        Service.all.remove(object: self)
     }
 }

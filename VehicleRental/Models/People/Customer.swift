@@ -8,17 +8,19 @@
 
 import Foundation
 
-class Customer: Person {
+final class Customer: Person, IncludingExtension {
+    static var all = ClassExtension<Customer>()
+    
     let name: String
     let surname: String
     let birthDate: Date
-    var address: String
+    var address: Address
     var email: String
     var phone: String
     let registrationDate: Date
     let discount: Double
     
-    init(name: String, surname: String, birthDate: Date, address: String, email: String, phone: String, registrationDate: Date, discount: Double) {
+    init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, registrationDate: Date, discount: Double) {
         self.name = name
         self.surname = surname
         self.birthDate = birthDate
@@ -27,6 +29,11 @@ class Customer: Person {
         self.phone = phone
         self.registrationDate = registrationDate
         self.discount = discount
+        Customer.all.add(object: self)
+    }
+    
+    deinit {
+        Customer.all.remove(object: self)
     }
     
     func rentVehicle() {

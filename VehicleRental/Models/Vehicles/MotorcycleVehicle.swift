@@ -8,10 +8,12 @@
 
 import Foundation
 
-class MotorcycleVehicle: Vehicle {
+class MotorcycleVehicle: Vehicle, IncludingExtension {
     enum MotorcycleType {
         case scooter, motorbike
     }
+    
+    static var all = ClassExtension<MotorcycleVehicle>()
     
     let brand: String
     let model: String
@@ -31,5 +33,10 @@ class MotorcycleVehicle: Vehicle {
         self.type = type
         self.hasWindshield = hasWindshield
         self.trunkSizes = trunkSizes
+        MotorcycleVehicle.all.add(object: self)
+    }
+    
+    deinit {
+        MotorcycleVehicle.all.remove(object: self)
     }
 }

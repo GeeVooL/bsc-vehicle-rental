@@ -8,7 +8,8 @@
 
 import Foundation
 
-class InvoiceItem {
+final class InvoiceItem: IncludingExtension {
+    static var all = ClassExtension<InvoiceItem>()
     static let vatTax = 0.23
     
     let name: String
@@ -18,5 +19,10 @@ class InvoiceItem {
     init(name: String, netPrice: Decimal) {
         self.name = name
         self.netPrice = netPrice
+        InvoiceItem.all.add(object: self)
+    }
+    
+    deinit {
+        InvoiceItem.all.remove(object: self)
     }
 }

@@ -8,12 +8,19 @@
 
 import Foundation
 
-class BranchOffice {
+final class BranchOffice: IncludingExtension {
+    static var all = ClassExtension<BranchOffice>()
+    
     let address: Address
     let garageCapacity: UInt
-
+    
     init(address: Address, garageCapacity: UInt) {
         self.address = address
         self.garageCapacity = garageCapacity
+        BranchOffice.all.add(object: self)
+    }
+    
+    deinit {
+        BranchOffice.all.remove(object: self)
     }
 }

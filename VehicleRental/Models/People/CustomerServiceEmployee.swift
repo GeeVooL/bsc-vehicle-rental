@@ -8,13 +8,14 @@
 
 import Foundation
 
-class CustomerServiceEmployee: Employee {
+final class CustomerServiceEmployee: Employee, IncludingExtension {
+    static var all = ClassExtension<CustomerServiceEmployee>()
     static let bonusPerOrder = 0.05
     
     let name: String
     let surname: String
     let birthDate: Date
-    var address: String
+    var address: Address
     var email: String
     var phone: String
     let employmentDate: Date
@@ -24,7 +25,7 @@ class CustomerServiceEmployee: Employee {
         baseSalary * Decimal(floatLiteral: CustomerServiceEmployee.bonusPerOrder) * Decimal(totalOrders)
     }
     
-    init(name: String, surname: String, birthDate: Date, address: String, email: String, phone: String, employmentDate: Date, baseSalary: Decimal, totalOrders: UInt) {
+    init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal, totalOrders: UInt) {
         self.name = name
         self.surname = surname
         self.birthDate = birthDate
@@ -34,7 +35,13 @@ class CustomerServiceEmployee: Employee {
         self.employmentDate = employmentDate
         self.baseSalary = baseSalary
         self.totalOrders = totalOrders
+        CustomerServiceEmployee.all.add(object: self)
     }
     
+    deinit {
+        CustomerServiceEmployee.all.remove(object: self)
+    }
+    
+    // Override default implementation from protocol
     func calculateSalary() -> Decimal { baseSalary + totalBonus }
 }

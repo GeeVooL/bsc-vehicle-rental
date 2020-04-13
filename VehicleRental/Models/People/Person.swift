@@ -12,7 +12,7 @@ protocol Person {
     var name: String { get }
     var surname: String { get }
     var birthDate: Date { get }
-    var address: String { get set }
+    var address: Address { get set }
     var email: String { get set }
     var phone: String { get set }
 }

@@ -8,7 +8,9 @@
 
 import Foundation
 
-class Invoice {
+final class Invoice: IncludingExtension {
+    static var all = ClassExtension<Invoice>()
+    
     let id: UInt
     // TODO(mDevv): implement the below properties when the associations are done
     var totalNet: Decimal?
@@ -16,5 +18,10 @@ class Invoice {
     
     init(id: UInt) {
         self.id = id
+        Invoice.all.add(object: self)
+    }
+    
+    deinit {
+        Invoice.all.add(object: self)
     }
 }

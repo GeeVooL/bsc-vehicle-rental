@@ -8,13 +8,20 @@
 
 import Foundation
 
-class Rental {
+final class Rental: IncludingExtension {
+    static var all = ClassExtension<Rental>()
+    
     let rentDate: Date
     let plannedReturnDate: Date
     
     init(rentDate: Date, plannedReturnDate: Date) {
         self.rentDate = rentDate
         self.plannedReturnDate = plannedReturnDate
+        Rental.all.add(object: self)
+    }
+    
+    deinit {
+        Rental.all.remove(object: self)
     }
     
     func calculatePrice() -> Decimal {

@@ -8,7 +8,9 @@
 
 import Foundation
 
-class ElectricEngineVehicle: Vehicle {
+class ElectricEngineVehicle: Vehicle, IncludingExtension {
+    static var all = ClassExtension<ElectricEngineVehicle>()
+    
     let brand: String
     let model: String
     let modelYear: UInt
@@ -27,5 +29,10 @@ class ElectricEngineVehicle: Vehicle {
         self.batteryCapacity = batteryCapacity
         self.chargingTime = chargingTime
         self.range = range
+        ElectricEngineVehicle.all.add(object: self)
+    }
+    
+    deinit {
+        ElectricEngineVehicle.all.remove(object: self)
     }
 }
