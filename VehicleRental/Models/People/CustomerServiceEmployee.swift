@@ -15,8 +15,8 @@ final class CustomerServiceEmployee: Employee, IncludingPersistentExtension {
     static var all = PersistentClassExtension<CustomerServiceEmployee>()
     static let bonusPerOrder = 0.05
     
-    let name: String
-    let surname: String
+    var name: String
+    var surname: String
     let birthDate: Date
     var address: Address
     var email: String
@@ -27,6 +27,9 @@ final class CustomerServiceEmployee: Employee, IncludingPersistentExtension {
     var totalBonus: Decimal {
         baseSalary * Decimal(CustomerServiceEmployee.bonusPerOrder) * Decimal(totalOrders)
     }
+    
+    // MP1 specific
+    var middleName: String?
     
     init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal, totalOrders: Int32) {
         self.name = name

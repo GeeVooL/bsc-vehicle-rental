@@ -14,14 +14,17 @@ final class Technician: Employee, IncludingPersistentExtension {
     
     static var all = PersistentClassExtension<Technician>()
     
-    let name: String
-    let surname: String
+    var name: String
+    var surname: String
     let birthDate: Date
     var address: Address
     var email: String
     var phone: String
     let employmentDate: Date
     var baseSalary: Decimal
+    
+    // MP1 specific
+    var middleName: String?
     
     init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal) {
         self.name = name

@@ -42,4 +42,14 @@ final class InvoiceItem: IncludingPersistentExtension {
         try context.save()
     }
 
+    // MP1 specific
+    static func getMoreExpensiveThan(price: Decimal) -> [InvoiceItem] {
+        var items: [InvoiceItem] = []
+        for item in InvoiceItem.all.objects {
+            if (item.grossPrice > price) {
+                items.append(item)
+            }
+        }
+        return items
+    }
 }

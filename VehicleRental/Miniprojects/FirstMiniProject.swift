@@ -20,17 +20,17 @@ class FirstMiniProject {
         // Customer
         Customer.all.print()
         let customer = Customer(name: "John",
-                         surname: "Appleseed",
-                         birthDate: Date(),
-                         address: Address(
-                            street: "Main Street",
-                            city: "New York City",
-                            zipCode: "10010",
-                            country: "USA"),
-                         email: "john.appleseed@icloud.com",
-                         phone: "202-555-0112",
-                         registrationDate: Date(),
-                         discount: 0.02
+                                surname: "Appleseed",
+                                birthDate: Date(),
+                                address: Address(
+                                    street: "Main Street",
+                                    city: "New York City",
+                                    zipCode: "10010",
+                                    country: "USA"),
+                                email: "john.appleseed@icloud.com",
+                                phone: "202-555-0112",
+                                registrationDate: Date(),
+                                discount: 0.02
         )
         Customer.all.print()
         Customer.all.remove(object: customer)
@@ -131,7 +131,24 @@ class FirstMiniProject {
     }
     
     func checkOptionalProperty() {
-        // TODO: Implement me
+        let customer = Customer(name: "John",
+                                surname: "Appleseed",
+                                birthDate: Date(),
+                                address: Address(
+                                    street: "Main Street",
+                                    city: "New York City",
+                                    zipCode: "10010",
+                                    country: "USA"),
+                                email: "john.appleseed@icloud.com",
+                                phone: "202-555-0112",
+                                registrationDate: Date(),
+                                discount: 0.02)
+        
+        print(String(describing: customer))
+        print(customer.middleName as Any)
+        customer.middleName = "Hans"
+        print(String(describing: customer))
+        print(customer.middleName!)
     }
     
     func checkRepetitiveProperty() {
@@ -165,11 +182,43 @@ class FirstMiniProject {
     }
     
     func checkClassMethod() {
-        // TODO: Implement me
+        InvoiceItem.all.print()
+        let _ = InvoiceItem(name: "Item1", netPrice: Decimal(floatLiteral: 1000.0))
+        let _ = InvoiceItem(name: "Item2", netPrice: Decimal(floatLiteral: 1010.0))
+        let _ = InvoiceItem(name: "Item3", netPrice: Decimal(floatLiteral: 1100.0))
+        let _ = InvoiceItem(name: "Item4", netPrice: Decimal(floatLiteral: 2000.0))
+        let _ = InvoiceItem(name: "Item5", netPrice: Decimal(floatLiteral: 2002.0))
+        let _ = InvoiceItem(name: "Item6", netPrice: Decimal(floatLiteral: 2020.0))
+        let _ = InvoiceItem(name: "Item7", netPrice: Decimal(floatLiteral: 2200.0))
+        InvoiceItem.all.print()
+        // The following function compares against the gross price
+        let items = InvoiceItem.getMoreExpensiveThan(price: Decimal(floatLiteral: 2000.0))
+        print(items)
     }
     
     func checkOverloading() {
-        // TODO: Implement me
+        var technician = Technician(
+            name: "",
+            surname: "",
+            birthDate: Date(),
+            address: Address(
+                street: "Wiejska 4",
+                city: "Warsaw",
+                zipCode: "00-902",
+                country: "Poland"
+            ),
+            email: "jan.kowalski@sejm.gov.pl",
+            phone: "700800100",
+            employmentDate: Date(),
+            baseSalary: 3212.54
+        )
+        
+        print(String(describing: technician))
+        print("\(technician.name) \(technician.middleName ?? "") \(technician.surname)")
+        technician.setName(name: "Johnny", surname: "English")
+        print("\(technician.name) \(technician.middleName ?? "") \(technician.surname)")
+        technician.setName(name: "Johnny", middleName: "Gary", surname: "English")
+        print("\(technician.name) \(technician.middleName ?? "") \(technician.surname)")
     }
     
     func checkOverriding() {
