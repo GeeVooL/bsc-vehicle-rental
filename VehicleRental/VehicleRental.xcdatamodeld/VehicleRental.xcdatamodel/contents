@@ -44,7 +44,7 @@
     </entity>
     <entity name="MotorcycleVehicleEntity" representedClassName="MotorcycleVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
         <attribute name="hasWindshield" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="trunkSizes" attributeType="String" customClassName="[Int32]"/>
+        <attribute name="trunkSizes" attributeType="Transformable" customClassName="[Int32]"/>
         <attribute name="type" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="PersonEntity" representedClassName="PersonEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">

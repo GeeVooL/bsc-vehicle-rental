@@ -24,10 +24,10 @@ class MotorcycleVehicle: Vehicle, IncludingPersistentExtension {
     let color: String
     var pricePerDay: Decimal
     let type: MotorcycleType
-    let hasWindshield: Bool
-    let trunkSizes: String
+    var hasWindshield: Bool
+    var trunkSizes: [Int32]
     
-    init(brand: String, model: String, modelYear: Int32, colour: String, pricePerDay: Decimal, type: MotorcycleVehicle.MotorcycleType, hasWindshield: Bool, trunkSizes: String) {
+    init(brand: String, model: String, modelYear: Int32, colour: String, pricePerDay: Decimal, type: MotorcycleVehicle.MotorcycleType, hasWindshield: Bool, trunkSizes: [Int32]) {
         self.brand = brand
         self.model = model
         self.modelYear = modelYear
