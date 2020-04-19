@@ -57,6 +57,7 @@ class MotorcycleVehicle: Vehicle, IncludingPersistentExtension {
         entity.pricePerDay = pricePerDay as NSDecimalNumber
         entity.type = type.rawValue
         entity.hasWindshield = hasWindshield
+        entity.trunkSizes = trunkSizes
         context.insert(entity)
         try context.save()
     }
