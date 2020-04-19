@@ -7,15 +7,16 @@
 //
 
 import Foundation
+import CoreData
 
-struct ClassExtension<T> {
-    private var objects = [T]()
+class ClassExtension<T> {
+    var objects = [T]()
     
-    mutating func add(object: T) {
+    func add(object: T) {
         objects.append(object)
     }
     
-    mutating func remove(object: T) {
+    func remove(object: T) {
         objects.removeAll(where: { $0 as AnyObject === object as AnyObject })
     }
     
@@ -28,6 +29,6 @@ struct ClassExtension<T> {
 }
 
 protocol IncludingExtension: DescriptiveStringConvertible {
-    associatedtype ClassType
-    static var all: ClassExtension<ClassType> { get set }
+    associatedtype ExtendableType
+    static var all: ClassExtension<ExtendableType> { get set }
 }

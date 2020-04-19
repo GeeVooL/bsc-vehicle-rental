@@ -1,4 +1,92 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AutomobileVehicleEntity" representedClassName="AutomobileVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="hasAircondition" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="numberOfSeats" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="trunkSize" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="BranchOfficeEntity" representedClassName="BranchOfficeEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="address" attributeType="String" customClassName="Address"/>
+        <attribute name="garageCapacity" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="CombustionEngineVehicleEntity" representedClassName="CombustionEngineVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="averageFuelConsumption" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="tankCapacity" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="CustomerEntity" representedClassName="CustomerEntity" parentEntity="PersonEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="discount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="registrationDate" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="CustomerServiceEmployeeEntity" representedClassName="CustomerServiceEmployeeEntity" parentEntity="EmployeeEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="staticBonusPerOrder" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalOrders" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ElectricEngineVehicleEntity" representedClassName="ElectricEngineVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="batteryCapacity" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="chargingTime" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="range" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="EmployeeEntity" representedClassName="EmployeeEntity" isAbstract="YES" parentEntity="PersonEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="baseSalary" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="employmentDate" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="HybridVehicleEntity" representedClassName="HybridVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="maxSpeedUsingElectricEngine" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="InvoiceEntity" representedClassName="InvoiceEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="InvoiceItemEntity" representedClassName="InvoiceItemEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+        <attribute name="netPrice" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="staticVatTax" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="MotorcycleVehicleEntity" representedClassName="MotorcycleVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="hasWindshield" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="trunkSizes" attributeType="String" customClassName="[Int32]"/>
+        <attribute name="type" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="PersonEntity" representedClassName="PersonEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="address" attributeType="String" defaultValueString="" customClassName="Address"/>
+        <attribute name="birthDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="email" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="phone" attributeType="String"/>
+        <attribute name="surname" attributeType="String"/>
+    </entity>
+    <entity name="RentalEntity" representedClassName="RentalEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="plannedReturnDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="rentDate" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="ServiceEntity" representedClassName="ServiceEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="issueDescription" attributeType="String"/>
+        <attribute name="serviceDate" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="TechnicianEntity" representedClassName="TechnicianEntity" parentEntity="EmployeeEntity" syncable="YES" codeGenerationType="class"/>
+    <entity name="VehicleEntity" representedClassName="VehicleEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="brand" attributeType="String"/>
+        <attribute name="color" attributeType="String"/>
+        <attribute name="model" attributeType="String"/>
+        <attribute name="modelYear" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pricePerDay" attributeType="Decimal" defaultValueString="0.0"/>
+    </entity>
+    <elements>
+        <element name="AutomobileVehicleEntity" positionX="36" positionY="144" width="128" height="88"/>
+        <element name="BranchOfficeEntity" positionX="0" positionY="99" width="128" height="73"/>
+        <element name="CombustionEngineVehicleEntity" positionX="27" positionY="144" width="128" height="73"/>
+        <element name="CustomerEntity" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="CustomerServiceEmployeeEntity" positionX="-36" positionY="36" width="128" height="73"/>
+        <element name="ElectricEngineVehicleEntity" positionX="-18" positionY="90" width="128" height="88"/>
+        <element name="EmployeeEntity" positionX="9" positionY="126" width="128" height="73"/>
+        <element name="HybridVehicleEntity" positionX="18" positionY="126" width="128" height="73"/>
+        <element name="InvoiceEntity" positionX="18" positionY="117" width="128" height="58"/>
+        <element name="InvoiceItemEntity" positionX="27" positionY="126" width="128" height="88"/>
+        <element name="MotorcycleVehicleEntity" positionX="27" positionY="135" width="128" height="88"/>
+        <element name="PersonEntity" positionX="0" positionY="99" width="128" height="133"/>
+        <element name="RentalEntity" positionX="9" positionY="108" width="128" height="73"/>
+        <element name="ServiceEntity" positionX="-9" positionY="90" width="128" height="73"/>
+        <element name="TechnicianEntity" positionX="9" positionY="63" width="128" height="43"/>
+        <element name="VehicleEntity" positionX="-9" positionY="99" width="128" height="118"/>
+    </elements>
 </model>

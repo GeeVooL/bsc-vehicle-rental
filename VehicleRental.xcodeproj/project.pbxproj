@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4E0A50742443D41800B6DA65 /* DescriptiveStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A50732443D41800B6DA65 /* DescriptiveStringConvertible.swift */; };
+		4E0DD2F6244A990700EA5DF3 /* ManagedObjectMappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0DD2F5244A990700EA5DF3 /* ManagedObjectMappable.swift */; };
+		4E13119A244BC35F004357B6 /* FirstMiniProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E131199244BC35F004357B6 /* FirstMiniProject.swift */; };
+		4E13119C244BC3A7004357B6 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E13119B244BC3A7004357B6 /* PersistenceManager.swift */; };
+		4E13119E244BD4BF004357B6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4E13119D244BD4BF004357B6 /* .gitignore */; };
+		4E23F080244B925A00392471 /* PersistentClassExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E23F07F244B925A00392471 /* PersistentClassExtension.swift */; };
 		4EBFFB9E244239EB00B7D3CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFB9D244239EB00B7D3CE /* AppDelegate.swift */; };
 		4EBFFBA0244239EB00B7D3CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFB9F244239EB00B7D3CE /* SceneDelegate.swift */; };
 		4EBFFBA3244239EB00B7D3CE /* VehicleRental.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFBA1244239EB00B7D3CE /* VehicleRental.xcdatamodeld */; };
@@ -56,6 +61,11 @@
 
 /* Begin PBXFileReference section */
 		4E0A50732443D41800B6DA65 /* DescriptiveStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptiveStringConvertible.swift; sourceTree = "<group>"; };
+		4E0DD2F5244A990700EA5DF3 /* ManagedObjectMappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectMappable.swift; sourceTree = "<group>"; };
+		4E131199244BC35F004357B6 /* FirstMiniProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMiniProject.swift; sourceTree = "<group>"; };
+		4E13119B244BC3A7004357B6 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		4E13119D244BD4BF004357B6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		4E23F07F244B925A00392471 /* PersistentClassExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentClassExtension.swift; sourceTree = "<group>"; };
 		4EBFFB9A244239EB00B7D3CE /* VehicleRental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VehicleRental.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBFFB9D244239EB00B7D3CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EBFFB9F244239EB00B7D3CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +132,8 @@
 			children = (
 				4EBFFBFA2443827800B7D3CE /* ClassExtension.swift */,
 				4E0A50732443D41800B6DA65 /* DescriptiveStringConvertible.swift */,
+				4E0DD2F5244A990700EA5DF3 /* ManagedObjectMappable.swift */,
+				4E23F07F244B925A00392471 /* PersistentClassExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -134,9 +146,18 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		4E131198244BC342004357B6 /* Miniprojects */ = {
+			isa = PBXGroup;
+			children = (
+				4E131199244BC35F004357B6 /* FirstMiniProject.swift */,
+			);
+			path = Miniprojects;
+			sourceTree = "<group>";
+		};
 		4EBFFB91244239EB00B7D3CE = {
 			isa = PBXGroup;
 			children = (
+				4E13119D244BD4BF004357B6 /* .gitignore */,
 				4EBFFBF92442A4CA00B7D3CE /* README.md */,
 				4EBFFB9C244239EB00B7D3CE /* VehicleRental */,
 				4EBFFBB6244239EE00B7D3CE /* VehicleRentalTests */,
@@ -158,6 +179,7 @@
 		4EBFFB9C244239EB00B7D3CE /* VehicleRental */ = {
 			isa = PBXGroup;
 			children = (
+				4E131198244BC342004357B6 /* Miniprojects */,
 				4EBFFBD024424FD500B7D3CE /* Models */,
 				4EBFFBD124424FE200B7D3CE /* Views */,
 				4EBFFBD224424FE900B7D3CE /* Controllers */,
@@ -169,6 +191,7 @@
 				4EBFFBAB244239EE00B7D3CE /* LaunchScreen.storyboard */,
 				4EBFFBAE244239EE00B7D3CE /* Info.plist */,
 				4EBFFBA1244239EB00B7D3CE /* VehicleRental.xcdatamodeld */,
+				4E13119B244BC3A7004357B6 /* PersistenceManager.swift */,
 				4EBFFBA8244239EE00B7D3CE /* Preview Content */,
 			);
 			path = VehicleRental;
@@ -366,6 +389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E13119E244BD4BF004357B6 /* .gitignore in Resources */,
 				4EBFFBAD244239EE00B7D3CE /* LaunchScreen.storyboard in Resources */,
 				4EBFFBAA244239EE00B7D3CE /* Preview Assets.xcassets in Resources */,
 				4EBFFBA7244239EE00B7D3CE /* Assets.xcassets in Resources */,
@@ -396,15 +420,19 @@
 				4EBFFBD42442508B00B7D3CE /* Person.swift in Sources */,
 				4EBFFB9E244239EB00B7D3CE /* AppDelegate.swift in Sources */,
 				4EBFFBA0244239EB00B7D3CE /* SceneDelegate.swift in Sources */,
+				4E13119A244BC35F004357B6 /* FirstMiniProject.swift in Sources */,
 				4EBFFBE424427E1B00B7D3CE /* ElectricEngineVehicle.swift in Sources */,
 				4EBFFBDA24425DEF00B7D3CE /* CustomerServiceEmployee.swift in Sources */,
 				4EBFFBEF244282C000B7D3CE /* BranchOffice.swift in Sources */,
 				4EBFFBF8244297D400B7D3CE /* Address.swift in Sources */,
 				4EBFFBEA2442821800B7D3CE /* AutomobileVehicle.swift in Sources */,
+				4E23F080244B925A00392471 /* PersistentClassExtension.swift in Sources */,
 				4EBFFBE224427E0200B7D3CE /* CombustionEngineVehicle.swift in Sources */,
 				4EBFFBD8244257ED00B7D3CE /* Employee.swift in Sources */,
 				4EBFFBE82442808A00B7D3CE /* MotorcycleVehicle.swift in Sources */,
 				4E0A50742443D41800B6DA65 /* DescriptiveStringConvertible.swift in Sources */,
+				4E0DD2F6244A990700EA5DF3 /* ManagedObjectMappable.swift in Sources */,
+				4E13119C244BC3A7004357B6 /* PersistenceManager.swift in Sources */,
 				4EBFFBED2442826F00B7D3CE /* Service.swift in Sources */,
 				4EBFFBF32442842500B7D3CE /* Invoice.swift in Sources */,
 				4EBFFBF1244283F500B7D3CE /* Rental.swift in Sources */,

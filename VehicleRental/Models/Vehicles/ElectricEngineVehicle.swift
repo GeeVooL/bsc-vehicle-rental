@@ -7,24 +7,27 @@
 //
 
 import Foundation
+import CoreData
 
-class ElectricEngineVehicle: Vehicle, IncludingExtension {
-    static var all = ClassExtension<ElectricEngineVehicle>()
+class ElectricEngineVehicle: Vehicle, IncludingPersistentExtension {
+    typealias EntityType = ElectricEngineVehicleEntity
+    
+    static var all = PersistentClassExtension<ElectricEngineVehicle>()
     
     let brand: String
     let model: String
-    let modelYear: UInt
-    let colour: String
+    let modelYear: Int32
+    let color: String
     var pricePerDay: Decimal
     let batteryCapacity: Double
-    let chargingTime: TimeInterval
-    let range: UInt
+    let chargingTime: Int32
+    let range: Int32
     
-    init(brand: String, model: String, modelYear: UInt, colour: String, pricePerDay: Decimal, batteryCapacity: Double, chargingTime: TimeInterval, range: UInt) {
+    init(brand: String, model: String, modelYear: Int32, colour: String, pricePerDay: Decimal, batteryCapacity: Double, chargingTime: Int32, range: Int32) {
         self.brand = brand
         self.model = model
         self.modelYear = modelYear
-        self.colour = colour
+        self.color = colour
         self.pricePerDay = pricePerDay
         self.batteryCapacity = batteryCapacity
         self.chargingTime = chargingTime
@@ -32,7 +35,26 @@ class ElectricEngineVehicle: Vehicle, IncludingExtension {
         ElectricEngineVehicle.all.add(object: self)
     }
     
+    required convenience init(from object: NSManagedObject) throws {
+        let entity = object as! EntityType
+        self.init(brand: entity.brand!, model: entity.model!, modelYear: entity.modelYear, colour: entity.color!, pricePerDay: entity.pricePerDay! as Decimal, batteryCapacity: entity.batteryCapacity, chargingTime: entity.chargingTime, range: entity.range)
+    }
+    
     deinit {
         ElectricEngineVehicle.all.remove(object: self)
+    }
+    
+    func save(context: NSManagedObjectContext) throws {
+        let entity = ElectricEngineVehicleEntity(context: context)
+        entity.brand = brand
+        entity.model = model
+        entity.modelYear = modelYear
+        entity.color = color
+        entity.pricePerDay = pricePerDay as NSDecimalNumber
+        entity.batteryCapacity = batteryCapacity
+        entity.chargingTime = chargingTime
+        entity.range = range
+        context.insert(entity)
+        try context.save()
     }
 }

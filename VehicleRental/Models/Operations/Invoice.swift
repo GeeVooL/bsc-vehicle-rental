@@ -7,21 +7,36 @@
 //
 
 import Foundation
+import CoreData
 
-final class Invoice: IncludingExtension {
-    static var all = ClassExtension<Invoice>()
+final class Invoice: IncludingPersistentExtension {
+    typealias EntityType = InvoiceEntity
     
-    let id: UInt
+    static var all = PersistentClassExtension<Invoice>()
+    
+    let id: Int32
     // TODO(mDevv): implement the below properties when the associations are done
     var totalNet: Decimal?
     var totalGross: Decimal?
     
-    init(id: UInt) {
+    init(id: Int32) {
         self.id = id
         Invoice.all.add(object: self)
     }
     
+    required convenience init(from object: NSManagedObject) throws {
+        let entity = object as! EntityType
+        self.init(id: entity.id)
+    }
+    
     deinit {
         Invoice.all.add(object: self)
+    }
+    
+    func save(context: NSManagedObjectContext) throws {
+        let entity = InvoiceEntity(context: context)
+        entity.id = id
+        context.insert(entity)
+        try context.save()
     }
 }

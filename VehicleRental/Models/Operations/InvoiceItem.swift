@@ -7,14 +7,17 @@
 //
 
 import Foundation
+import CoreData
 
-final class InvoiceItem: IncludingExtension {
-    static var all = ClassExtension<InvoiceItem>()
+final class InvoiceItem: IncludingPersistentExtension {
+    typealias EntityType = InvoiceItemEntity
+    
+    static var all = PersistentClassExtension<InvoiceItem>()
     static let vatTax = 0.23
     
     let name: String
     let netPrice: Decimal
-    var grossPrice: Decimal { netPrice * (1 + Decimal(InvoiceItem.vatTax)) }
+    var grossPrice: Decimal { netPrice * (Decimal(1) + Decimal(InvoiceItem.vatTax)) }
     
     init(name: String, netPrice: Decimal) {
         self.name = name
@@ -22,7 +25,21 @@ final class InvoiceItem: IncludingExtension {
         InvoiceItem.all.add(object: self)
     }
     
+    required convenience init(from object: NSManagedObject) throws {
+        let entity = object as! EntityType
+        self.init(name: entity.name!, netPrice: entity.netPrice! as Decimal)
+    }
+    
     deinit {
         InvoiceItem.all.remove(object: self)
     }
+    
+    func save(context: NSManagedObjectContext) throws {
+        let entity = InvoiceItemEntity(context: context)
+        entity.name = name
+        entity.netPrice = netPrice as NSDecimalNumber
+        context.insert(entity)
+        try context.save()
+    }
+
 }

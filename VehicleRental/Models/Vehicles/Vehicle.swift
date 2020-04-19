@@ -11,7 +11,7 @@ import Foundation
 protocol Vehicle {
     var brand: String { get }
     var model: String { get }
-    var modelYear: UInt { get }
-    var colour: String { get }
+    var modelYear: Int32 { get }
+    var color: String { get }
     var pricePerDay: Decimal { get set }
 }

@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import CoreData
 
-final class Customer: Person, IncludingExtension {
-    static var all = ClassExtension<Customer>()
+final class Customer: Person, IncludingPersistentExtension {
+    typealias EntityType = CustomerEntity
+    
+    static var all = PersistentClassExtension<Customer>()
     
     let name: String
     let surname: String
@@ -32,6 +35,13 @@ final class Customer: Person, IncludingExtension {
         Customer.all.add(object: self)
     }
     
+    required convenience init(from object: NSManagedObject) throws {
+        let entity = object as! EntityType
+        let addressString = try JSONDecoder().decode(Address.self, from: entity.address!.data(using: .utf8)!)
+        
+        self.init(name: entity.name!, surname: entity.surname!, birthDate: entity.birthDate!, address: addressString, email: entity.email!, phone: entity.phone!, registrationDate: entity.registrationDate!, discount: entity.discount)
+    }
+    
     deinit {
         Customer.all.remove(object: self)
     }
@@ -42,5 +52,23 @@ final class Customer: Person, IncludingExtension {
     
     static func listRentingCustomers() {
         // TODO(mDevv): Implement me.
+    }
+    
+    func save(context: NSManagedObjectContext) throws {
+        let encoder = JSONEncoder()
+        let jsonAddress = try encoder.encode(address)
+        let addressString = String(data: jsonAddress, encoding: .utf8)!
+        
+        let entity = CustomerEntity(context: context)
+        entity.name = name
+        entity.surname = surname
+        entity.birthDate = birthDate
+        entity.address = addressString
+        entity.email = email
+        entity.phone = phone
+        entity.registrationDate = registrationDate
+        entity.discount = discount
+        context.insert(entity)
+        try context.save()
     }
 }

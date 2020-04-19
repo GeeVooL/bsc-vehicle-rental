@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import CoreData
 
-final class Rental: IncludingExtension {
-    static var all = ClassExtension<Rental>()
+final class Rental: IncludingPersistentExtension {
+    typealias EntityType = RentalEntity
+    
+    static var all = PersistentClassExtension<Rental>()
     
     let rentDate: Date
     let plannedReturnDate: Date
@@ -20,6 +23,11 @@ final class Rental: IncludingExtension {
         Rental.all.add(object: self)
     }
     
+    required convenience init(from object: NSManagedObject) throws {
+        let entity = object as! EntityType
+        self.init(rentDate: entity.rentDate!, plannedReturnDate: entity.plannedReturnDate!)
+    }
+    
     deinit {
         Rental.all.remove(object: self)
     }
@@ -27,5 +35,13 @@ final class Rental: IncludingExtension {
     func calculatePrice() -> Decimal {
         // TODO(mDevv): Implement me when the associations are done
         return 0;
+    }
+    
+    func save(context: NSManagedObjectContext) throws {
+        let entity = RentalEntity(context: context)
+        entity.rentDate = rentDate
+        entity.plannedReturnDate = plannedReturnDate
+        context.insert(entity)
+        try context.save()
     }
 }
