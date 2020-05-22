@@ -14,6 +14,12 @@ final class Technician: Employee, IncludingPersistentExtension {
     
     static var all = PersistentClassExtension<Technician>()
     
+    enum Specialization: Int32 {
+        case electronics = 0
+        case mechanics = 1
+        case vulcanization = 2
+    }
+    
     let name: String
     let surname: String
     let birthDate: Date
@@ -22,8 +28,9 @@ final class Technician: Employee, IncludingPersistentExtension {
     var phone: String
     let employmentDate: Date
     var baseSalary: Decimal
+    var specialization: Specialization
     
-    init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal) {
+    init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal, specialization: Specialization) {
         self.name = name
         self.surname = surname
         self.birthDate = birthDate
@@ -32,6 +39,7 @@ final class Technician: Employee, IncludingPersistentExtension {
         self.phone = phone
         self.employmentDate = employmentDate
         self.baseSalary = baseSalary
+        self.specialization = specialization
         Technician.all.add(object: self)
     }
     
@@ -39,15 +47,11 @@ final class Technician: Employee, IncludingPersistentExtension {
         let entity = object as! EntityType
         let addressString = try JSONDecoder().decode(Address.self, from: entity.address!.data(using: .utf8)!)
         
-        self.init(name: entity.name!, surname: entity.surname!, birthDate: entity.birthDate!, address: addressString, email: entity.email!, phone: entity.phone!, employmentDate: entity.employmentDate!, baseSalary: entity.baseSalary! as Decimal)
+        self.init(name: entity.name!, surname: entity.surname!, birthDate: entity.birthDate!, address: addressString, email: entity.email!, phone: entity.phone!, employmentDate: entity.employmentDate!, baseSalary: entity.baseSalary! as Decimal, specialization: Specialization(rawValue: entity.specialization)!)
     }
     
     deinit {
         Technician.all.remove(object: self)
-    }
-    
-    enum Specialization {
-        case electronics, mechanics, vulcanization
     }
     
     func serviceVehicle() {

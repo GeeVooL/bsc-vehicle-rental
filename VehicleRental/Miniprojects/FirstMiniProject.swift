@@ -124,7 +124,8 @@ class FirstMiniProject {
             email: "jan.kowalski@sejm.gov.pl",
             phone: "700800100",
             employmentDate: date,
-            baseSalary: 3212.54
+            baseSalary: 3212.54,
+            specialization: Technician.Specialization.electronics
         )
         
         print(String(describing: technician))
@@ -203,7 +204,8 @@ class FirstMiniProject {
             email: "john.appleseed@icloud.com",
             phone: "202-555-0112",
             employmentDate: Date(),
-            baseSalary: 2300.0
+            baseSalary: 2300.0,
+            specialization: Technician.Specialization.electronics
         )
         
         print(customerServiceEmp.calculateSalary())
