@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-final class Customer: Person, IncludingPersistentExtension {
+final class Customer: Person, IncludingPersistentExtension, Invalidatable, ReferenceEquatable {
     typealias EntityType = CustomerEntity
     
     static var all = PersistentClassExtension<Customer>()
@@ -22,6 +22,9 @@ final class Customer: Person, IncludingPersistentExtension {
     var phone: String
     let registrationDate: Date
     let discount: Double
+    
+    var isValid: Bool = true
+    private var rentals: [Rental] = []
     
     init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, registrationDate: Date, discount: Double) {
         self.name = name
@@ -38,12 +41,33 @@ final class Customer: Person, IncludingPersistentExtension {
     required convenience init(from object: NSManagedObject) throws {
         let entity = object as! EntityType
         let addressString = try JSONDecoder().decode(Address.self, from: entity.address!.data(using: .utf8)!)
-        
+
         self.init(name: entity.name!, surname: entity.surname!, birthDate: entity.birthDate!, address: addressString, email: entity.email!, phone: entity.phone!, registrationDate: entity.registrationDate!, discount: entity.discount)
     }
     
-    deinit {
+    func invalidate() {
+        if !isValid { return }
+        
+        for r in rentals {
+            r.invalidate()
+        }
+        
         Customer.all.remove(object: self)
+        isValid = false
+    }
+    
+    func addRental(_ rental: Rental) {
+        if (!rentals.contains(rental)) {
+            rentals.append(rental)
+            rental.setCustomer(self)
+        }
+    }
+    
+    func removeRental(_ rental: Rental) -> Void {
+        if let index = rentals.firstIndex(of: rental) {
+            let removed = rentals.remove(at: index)
+            removed.invalidate()
+        }
     }
     
     func rentVehicle() {

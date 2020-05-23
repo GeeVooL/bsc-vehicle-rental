@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class MotorcycleVehicle: Vehicle, IncludingPersistentExtension {
+class MotorcycleVehicle: Vehicle, IncludingPersistentExtension, Invalidatable, ReferenceEquatable {
     typealias EntityType = MotorcycleVehicleEntity
     
     enum MotorcycleType: Int32 {
@@ -18,6 +18,7 @@ class MotorcycleVehicle: Vehicle, IncludingPersistentExtension {
     
     static var all = PersistentClassExtension<MotorcycleVehicle>()
     
+    let registrationNumber: String
     let brand: String
     let model: String
     let modelYear: Int32
@@ -27,7 +28,12 @@ class MotorcycleVehicle: Vehicle, IncludingPersistentExtension {
     var hasWindshield: Bool
     var trunkSizes: [Int32]
     
-    init(brand: String, model: String, modelYear: Int32, colour: String, pricePerDay: Decimal, type: MotorcycleVehicle.MotorcycleType, hasWindshield: Bool, trunkSizes: [Int32]) {
+    var isValid: Bool = true
+    var branchOffices: [BranchOffice] = []
+    var rentals: [Rental] = []
+    
+    init(registrationNumber: String, brand: String, model: String, modelYear: Int32, colour: String, pricePerDay: Decimal, type: MotorcycleVehicle.MotorcycleType, hasWindshield: Bool, trunkSizes: [Int32]) {
+        self.registrationNumber = registrationNumber
         self.brand = brand
         self.model = model
         self.modelYear = modelYear
@@ -41,11 +47,22 @@ class MotorcycleVehicle: Vehicle, IncludingPersistentExtension {
     
     required convenience init(from object: NSManagedObject) throws {
         let entity = object as! EntityType
-        self.init(brand: entity.brand!, model: entity.model!, modelYear: entity.modelYear, colour: entity.color!, pricePerDay: entity.pricePerDay! as Decimal, type: MotorcycleType(rawValue: entity.type)!, hasWindshield: entity.hasWindshield, trunkSizes: entity.trunkSizes!)
+        self.init(registrationNumber: entity.registrationNumber!, brand: entity.brand!, model: entity.model!, modelYear: entity.modelYear, colour: entity.color!, pricePerDay: entity.pricePerDay! as Decimal, type: MotorcycleType(rawValue: entity.type)!, hasWindshield: entity.hasWindshield, trunkSizes: entity.trunkSizes!)
     }
     
-    deinit {
+    func invalidate() {
+        if !isValid { return }
+        
+        for b in branchOffices {
+            b.removeVehicle(self)
+        }
+        
+        for r in rentals {
+            r.invalidate()
+        }
+        
         MotorcycleVehicle.all.remove(object: self)
+        isValid = false
     }
     
     func save(context: NSManagedObjectContext) throws {

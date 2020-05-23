@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Person {
+protocol Person: class {
     var name: String { get }
     var surname: String { get }
     var birthDate: Date { get }

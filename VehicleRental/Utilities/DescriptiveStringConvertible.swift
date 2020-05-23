@@ -24,7 +24,14 @@ extension DescriptiveStringConvertible {
                 } else {
                     output += ", "
                 }
-                output += "\(property): \(value)"
+                
+                if value is DescriptiveStringConvertible {
+                    output += "\(property): [value]"
+                } else if value is Array<DescriptiveStringConvertible> {
+                    output += "\(property): [count=\((value as! Array<DescriptiveStringConvertible>).count)]"
+                } else {
+                    output += "\(property): \(value)"
+                }
             }
         }
         

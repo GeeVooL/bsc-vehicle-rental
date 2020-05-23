@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-final class Technician: Employee, IncludingPersistentExtension {
+final class Technician: Employee, IncludingPersistentExtension, ReferenceEquatable {
     typealias EntityType = TechnicianEntity
     
     static var all = PersistentClassExtension<Technician>()
@@ -29,6 +29,9 @@ final class Technician: Employee, IncludingPersistentExtension {
     let employmentDate: Date
     var baseSalary: Decimal
     var specialization: Specialization
+    
+    var isValid: Bool = true
+    private var branchOffices: [BranchOffice] = []
     
     init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal, specialization: Specialization) {
         self.name = name
@@ -50,8 +53,30 @@ final class Technician: Employee, IncludingPersistentExtension {
         self.init(name: entity.name!, surname: entity.surname!, birthDate: entity.birthDate!, address: addressString, email: entity.email!, phone: entity.phone!, employmentDate: entity.employmentDate!, baseSalary: entity.baseSalary! as Decimal, specialization: Specialization(rawValue: entity.specialization)!)
     }
     
-    deinit {
+    func invalidate() {
+        if !isValid { return }
+        
+        for b in branchOffices {
+            b.removeEmployee(self)
+        }
+        
         Technician.all.remove(object: self)
+        isValid = false
+    }
+    
+    func addBranchOffice(_ branchOffice: BranchOffice) {
+        if !branchOffices.contains(branchOffice) {
+            branchOffices.append(branchOffice);
+            
+            branchOffice.addEmployee(self);
+        }
+    }
+    
+    func removeBranchOffice(_ branchOffice: BranchOffice) {
+        if let index = branchOffices.firstIndex(of: branchOffice) {
+            let removed = branchOffices.remove(at: index)
+            removed.removeEmployee(self)
+        }
     }
     
     func serviceVehicle() {

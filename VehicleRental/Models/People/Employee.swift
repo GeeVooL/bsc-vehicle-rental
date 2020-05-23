@@ -11,7 +11,7 @@ import Foundation
 protocol Employee: Person {
     var employmentDate: Date { get }
     var baseSalary: Decimal { get }
-    
+        
     func calculateSalary() -> Decimal
 }
 

@@ -9,11 +9,12 @@
 import Foundation
 import CoreData
 
-class AutomobileVehicle: Vehicle, IncludingPersistentExtension {
+class AutomobileVehicle: Vehicle, IncludingPersistentExtension, Invalidatable, ReferenceEquatable {
     typealias EntityType = AutomobileVehicleEntity
     
     static var all = PersistentClassExtension<AutomobileVehicle>()
     
+    let registrationNumber: String
     let brand: String
     let model: String
     let modelYear: Int32
@@ -23,7 +24,12 @@ class AutomobileVehicle: Vehicle, IncludingPersistentExtension {
     let numberOfSeats: Int32
     let hasAircondition: Bool
     
-    init(brand: String, model: String, modelYear: Int32, color: String, pricePerDay: Decimal, trunkSize: Int32, numberOfSeats: Int32, hasAircondition: Bool) {
+    var isValid: Bool = true
+    var branchOffices: [BranchOffice] = []
+    var rentals: [Rental] = []
+    
+    init(registrationNumber: String, brand: String, model: String, modelYear: Int32, color: String, pricePerDay: Decimal, trunkSize: Int32, numberOfSeats: Int32, hasAircondition: Bool) {
+        self.registrationNumber = registrationNumber
         self.brand = brand
         self.model = model
         self.modelYear = modelYear
@@ -37,11 +43,22 @@ class AutomobileVehicle: Vehicle, IncludingPersistentExtension {
     
     required convenience init(from object: NSManagedObject) throws {
         let entity = object as! EntityType
-        self.init(brand: entity.brand!, model: entity.model!, modelYear: entity.modelYear, color: entity.color!, pricePerDay: entity.pricePerDay! as Decimal, trunkSize: entity.trunkSize, numberOfSeats: entity.numberOfSeats, hasAircondition: entity.hasAircondition)
+        self.init(registrationNumber: entity.registrationNumber!, brand: entity.brand!, model: entity.model!, modelYear: entity.modelYear, color: entity.color!, pricePerDay: entity.pricePerDay! as Decimal, trunkSize: entity.trunkSize, numberOfSeats: entity.numberOfSeats, hasAircondition: entity.hasAircondition)
     }
     
-    deinit {
+    func invalidate() {
+        if !isValid { return }
+        
+        for b in branchOffices {
+            b.removeVehicle(self)
+        }
+        
+        for r in rentals {
+            r.invalidate()
+        }
+        
         AutomobileVehicle.all.remove(object: self)
+        isValid = false
     }
     
     func save(context: NSManagedObjectContext) throws {

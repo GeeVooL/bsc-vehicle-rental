@@ -63,13 +63,16 @@
         <attribute name="issueDescription" attributeType="String"/>
         <attribute name="serviceDate" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <entity name="TechnicianEntity" representedClassName="TechnicianEntity" parentEntity="EmployeeEntity" syncable="YES" codeGenerationType="class"/>
+    <entity name="TechnicianEntity" representedClassName="TechnicianEntity" parentEntity="EmployeeEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="specialization" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="VehicleEntity" representedClassName="VehicleEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="brand" attributeType="String"/>
         <attribute name="color" attributeType="String"/>
         <attribute name="model" attributeType="String"/>
         <attribute name="modelYear" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="pricePerDay" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="registrationNumber" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="AutomobileVehicleEntity" positionX="36" positionY="144" width="128" height="88"/>
@@ -86,7 +89,7 @@
         <element name="PersonEntity" positionX="0" positionY="99" width="128" height="133"/>
         <element name="RentalEntity" positionX="9" positionY="108" width="128" height="73"/>
         <element name="ServiceEntity" positionX="-9" positionY="90" width="128" height="73"/>
-        <element name="TechnicianEntity" positionX="9" positionY="63" width="128" height="43"/>
-        <element name="VehicleEntity" positionX="-9" positionY="99" width="128" height="118"/>
+        <element name="TechnicianEntity" positionX="9" positionY="63" width="128" height="58"/>
+        <element name="VehicleEntity" positionX="-9" positionY="99" width="128" height="133"/>
     </elements>
 </model>

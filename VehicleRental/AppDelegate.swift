@@ -40,6 +40,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("===OVERRIDING===")
         firstMiniProject.checkOverriding()
         
+        let secondMiniProject = SecondMiniProject()
+        print("===STANDARD ASSOCIATION===")
+        secondMiniProject.checkStandardAssociation()
+        print("===QUALIFIED ASSOCIATION===")
+        secondMiniProject.checkQualifiedAssociation()
+        print("===ATTRIBUTED ASSOCIATION===")
+        secondMiniProject.checkAttributedAssociation()
+        print("===COMPOSITION===")
+        secondMiniProject.checkComposition()
+        
         return true
     }
 

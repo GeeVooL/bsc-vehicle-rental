@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class HybridVehicle: Vehicle, IncludingPersistentExtension {
+class HybridVehicle: Vehicle, IncludingPersistentExtension, Invalidatable, ReferenceEquatable {
     typealias EntityType = HybridVehicleEntity
     
     enum HybridType: Int32 {
@@ -18,15 +18,21 @@ class HybridVehicle: Vehicle, IncludingPersistentExtension {
     
     static var all = PersistentClassExtension<HybridVehicle>()
     
-    var brand: String
-    var model: String
-    var modelYear: Int32
-    var color: String
+    let registrationNumber: String
+    let brand: String
+    let model: String
+    let modelYear: Int32
+    let color: String
     var pricePerDay: Decimal
     let type: HybridType
     let maxSpeedUsingElectricEngine: Float
     
-    init(brand: String, model: String, modelYear: Int32, colour: String, pricePerDay: Decimal, type: HybridVehicle.HybridType, maxSpeedUsingElectricEngine: Float) {
+    var isValid: Bool = true
+    var branchOffices: [BranchOffice] = []
+    var rentals: [Rental] = []
+    
+    init(registrationNumber: String, brand: String, model: String, modelYear: Int32, colour: String, pricePerDay: Decimal, type: HybridVehicle.HybridType, maxSpeedUsingElectricEngine: Float) {
+        self.registrationNumber = registrationNumber
         self.brand = brand
         self.model = model
         self.modelYear = modelYear
@@ -39,11 +45,22 @@ class HybridVehicle: Vehicle, IncludingPersistentExtension {
     
     required convenience init(from object: NSManagedObject) throws {
         let entity = object as! EntityType
-        self.init(brand: entity.brand!, model: entity.model!, modelYear: entity.modelYear, colour: entity.color!, pricePerDay: entity.pricePerDay! as Decimal, type: HybridType(rawValue: entity.type)!, maxSpeedUsingElectricEngine: entity.maxSpeedUsingElectricEngine)
+        self.init(registrationNumber: entity.registrationNumber!, brand: entity.brand!, model: entity.model!, modelYear: entity.modelYear, colour: entity.color!, pricePerDay: entity.pricePerDay! as Decimal, type: HybridType(rawValue: entity.type)!, maxSpeedUsingElectricEngine: entity.maxSpeedUsingElectricEngine)
     }
     
-    deinit {
+    func invalidate() {
+        if !isValid { return }
+        
+        for b in branchOffices {
+            b.removeVehicle(self)
+        }
+        
+        for r in rentals {
+            r.invalidate()
+        }
+        
         HybridVehicle.all.remove(object: self)
+        isValid = false
     }
     
     func save(context: NSManagedObjectContext) throws {

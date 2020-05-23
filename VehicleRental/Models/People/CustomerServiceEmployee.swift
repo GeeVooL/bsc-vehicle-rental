@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-final class CustomerServiceEmployee: Employee, IncludingPersistentExtension {
+final class CustomerServiceEmployee: Employee, IncludingPersistentExtension, Invalidatable, ReferenceEquatable {
     typealias EntityType = CustomerServiceEmployeeEntity
     
     static var all = PersistentClassExtension<CustomerServiceEmployee>()
@@ -27,6 +27,9 @@ final class CustomerServiceEmployee: Employee, IncludingPersistentExtension {
     var totalBonus: Decimal {
         baseSalary * Decimal(CustomerServiceEmployee.bonusPerOrder) * Decimal(totalOrders)
     }
+    
+    var isValid: Bool = true
+    private var branchOffices: [BranchOffice] = []
     
     init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal, totalOrders: Int32) {
         self.name = name
@@ -48,8 +51,30 @@ final class CustomerServiceEmployee: Employee, IncludingPersistentExtension {
         self.init(name: entity.name!, surname: entity.surname!, birthDate: entity.birthDate!, address: addressString, email: entity.email!, phone: entity.phone!, employmentDate: entity.employmentDate!, baseSalary: entity.baseSalary! as Decimal, totalOrders: entity.totalOrders)
     }
     
-    deinit {
+    func invalidate() {
+        if !isValid { return }
+        
+        for b in branchOffices {
+            b.removeEmployee(self)
+        }
+        
         CustomerServiceEmployee.all.remove(object: self)
+        isValid = false
+    }
+    
+    func addBranchOffice(_ branchOffice: BranchOffice) {
+        if !branchOffices.contains(branchOffice) {
+            branchOffices.append(branchOffice);
+            
+            branchOffice.addEmployee(self);
+        }
+    }
+    
+    func removeBranchOffice(_ branchOffice: BranchOffice) {
+        if let index = branchOffices.firstIndex(of: branchOffice) {
+            let removed = branchOffices.remove(at: index)
+            removed.removeEmployee(self)
+        }
     }
     
     // Override default implementation from protocol

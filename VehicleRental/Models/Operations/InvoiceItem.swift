@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-final class InvoiceItem: IncludingPersistentExtension {
+final class InvoiceItem: IncludingPersistentExtension, Invalidatable, ReferenceEquatable {
     typealias EntityType = InvoiceItemEntity
     
     static var all = PersistentClassExtension<InvoiceItem>()
@@ -19,7 +19,18 @@ final class InvoiceItem: IncludingPersistentExtension {
     let netPrice: Decimal
     var grossPrice: Decimal { netPrice * (Decimal(1) + Decimal(InvoiceItem.vatTax)) }
     
-    init(name: String, netPrice: Decimal) {
+    var isValid: Bool = true
+    fileprivate var invoice: Invoice? = nil
+    
+    static func create(invoice: Invoice, name: String, netPrice: Decimal) -> InvoiceItem? {
+        let item = InvoiceItem(name: name, netPrice: netPrice)
+        item.invoice = invoice
+        let success = invoice.addItem(item)
+        
+        return success ? item : nil
+    }
+    
+    private init(name: String, netPrice: Decimal) {
         self.name = name
         self.netPrice = netPrice
         InvoiceItem.all.add(object: self)
@@ -30,8 +41,12 @@ final class InvoiceItem: IncludingPersistentExtension {
         self.init(name: entity.name!, netPrice: entity.netPrice! as Decimal)
     }
     
-    deinit {
+    func invalidate() {
+        if !isValid { return }
+        
         InvoiceItem.all.remove(object: self)
+        
+        isValid = false
     }
     
     func save(context: NSManagedObjectContext) throws {
@@ -41,5 +56,4 @@ final class InvoiceItem: IncludingPersistentExtension {
         context.insert(entity)
         try context.save()
     }
-
 }

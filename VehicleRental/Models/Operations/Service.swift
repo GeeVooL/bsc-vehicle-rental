@@ -9,13 +9,15 @@
 import Foundation
 import CoreData
 
-final class Service: IncludingPersistentExtension {
+final class Service: IncludingPersistentExtension, Invalidatable, ReferenceEquatable {
     typealias EntityType = ServiceEntity
     
     static var all = PersistentClassExtension<Service>()
     
     let serviceDate: Date
     let issueDescription: String
+    
+    var isValid: Bool = true
     
     init(serviceDate: Date, issueDescription: String) {
         self.serviceDate = serviceDate
@@ -28,8 +30,11 @@ final class Service: IncludingPersistentExtension {
         self.init(serviceDate: entity.serviceDate!, issueDescription: entity.issueDescription!)
     }
     
-    deinit {
+    func invalidate() {
+        if !isValid { return }
+        
         Service.all.remove(object: self)
+        isValid = false
     }
     
     func save(context: NSManagedObjectContext) throws {

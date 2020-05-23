@@ -39,6 +39,7 @@ class FirstMiniProject {
         // ElectricEngineVehicle
         ElectricEngineVehicle.all.print()
         let electric = ElectricEngineVehicle(
+            registrationNumber: "WX12312",
             brand: "Tesla",
             model: "Model S",
             modelYear: 2019,
@@ -51,18 +52,6 @@ class FirstMiniProject {
         ElectricEngineVehicle.all.print()
         ElectricEngineVehicle.all.remove(object: electric)
         ElectricEngineVehicle.all.print()
-        
-        // InvoiceItem
-        InvoiceItem.all.print()
-        let invoiceItem1 = InvoiceItem(name: "Item1", netPrice: 11.1)
-        let invoiceItem2 = InvoiceItem(name: "Item2", netPrice: 22.2)
-        let invoiceItem3 = InvoiceItem(name: "Item3", netPrice: 33.3)
-        InvoiceItem.all.print()
-        InvoiceItem.all.remove(object: invoiceItem1)
-        InvoiceItem.all.remove(object: invoiceItem2)
-        InvoiceItem.all.print()
-        InvoiceItem.all.remove(object: invoiceItem3)
-        InvoiceItem.all.print()
     }
     
     func checkPersistentExtension() {
@@ -137,6 +126,7 @@ class FirstMiniProject {
     
     func checkRepetitiveProperty() {
         let motorcycle = MotorcycleVehicle(
+            registrationNumber: "WW23XA",
             brand: "Yamaha",
             model: "MT-09",
             modelYear: 2018,
@@ -157,12 +147,7 @@ class FirstMiniProject {
     }
     
     func checkComputedProperty() {
-        let toiletPaper = InvoiceItem(
-            name: "Toilet paper",
-            netPrice: Decimal(floatLiteral: 10.49)
-        )
-        
-        print(toiletPaper.grossPrice)
+        // TODO: Implement me
     }
     
     func checkClassMethod() {
