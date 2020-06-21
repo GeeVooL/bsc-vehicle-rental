@@ -40,14 +40,14 @@ public class Person: NSManagedObject, Manageable {
     
     // Customer init
     public init(context: NSManagedObjectContext,
-         name: String,
-         surname: String,
-         birthDate: Date,
-         address: Address,
-         email: String,
-         phone: String,
-         discount: Float,
-         registrationDate: Date
+                name: String,
+                surname: String,
+                birthDate: Date,
+                address: Address,
+                email: String,
+                phone: String,
+                discount: Float,
+                registrationDate: Date
     ) {
         let description = NSEntityDescription.entity(forEntityName: "Person", in: context)!
         super.init(entity: description, insertInto: context)
@@ -65,14 +65,14 @@ public class Person: NSManagedObject, Manageable {
     
     // Employee init
     public init(context: NSManagedObjectContext,public
-         name: String,
-         surname: String,
-         birthDate: Date,
-         address: Address,
-         email: String,
-         phone: String,
-         baseSalary: Decimal,
-         employmentDate: Date
+        name: String,
+                surname: String,
+                birthDate: Date,
+                address: Address,
+                email: String,
+                phone: String,
+                baseSalary: Decimal,
+                employmentDate: Date
     ) {
         let description = NSEntityDescription.entity(forEntityName: "Person", in: context)!
         super.init(entity: description, insertInto: context)

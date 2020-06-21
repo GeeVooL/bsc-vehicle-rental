@@ -24,7 +24,7 @@ struct VehicleDetailsView: View {
                         .frame(width: 150, height: 150)
                         .clipped()
                         .cornerRadius(10)
-                        
+                    
                     Spacer()
                     
                     VStack(alignment: .leading) {

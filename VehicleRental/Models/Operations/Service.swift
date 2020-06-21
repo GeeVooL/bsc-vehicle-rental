@@ -36,10 +36,10 @@ public class Service: NSManagedObject, Manageable {
     }
     
     public init(context: NSManagedObjectContext,
-         technician: Technician,
-         vehicle: Vehicle,
-         serviceDate: Date,
-         issueDescription: String
+                technician: Technician,
+                vehicle: Vehicle,
+                serviceDate: Date,
+                issueDescription: String
     ) {
         let description = NSEntityDescription.entity(forEntityName: "Service", in: context)!
         super.init(entity: description, insertInto: context)

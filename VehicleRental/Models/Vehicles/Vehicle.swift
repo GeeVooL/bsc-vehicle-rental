@@ -45,9 +45,9 @@ protocol IVehicle {
     func handOver()
     func reclaim()
     func setMotorcycleRole(context: NSManagedObjectContext,
-                      hasWindshield: Bool,
-                      trunkSizes: [Int32],
-                      type: MotorcycleType)
+                           hasWindshield: Bool,
+                           trunkSizes: [Int32],
+                           type: MotorcycleType)
     func setAutomobileRole(context: NSManagedObjectContext,
                            hasAircondition: Bool,
                            numberOfSeats: Int32,
@@ -94,7 +94,7 @@ public class Vehicle: NSManagedObject, IVehicle {
         // Silence compilator error
         return EngineType.combustion
     }
-
+    
     var vehicleType: VehicleType {
         return self.automobile != nil ? VehicleType.automobile : VehicleType.motorcycle
     }
@@ -127,7 +127,7 @@ public class Vehicle: NSManagedObject, IVehicle {
     var trunkSize: Int32? {
         self.automobile?.trunkSize
     }
-
+    
     // MARK: - CoreData helpers
     
     @objc(addServicesObject:)
@@ -164,16 +164,16 @@ public class Vehicle: NSManagedObject, IVehicle {
     
     // Automobile initializer
     public init(context: NSManagedObjectContext,
-         entityName: String,
-         brand: String,
-         color: String,
-         model: String,
-         modelYear: Int32,
-         pricePerDay: Decimal,
-         imageName: String?,
-         hasAircondition: Bool,
-         numberOfSeats: Int32,
-         trunkSize: Int32
+                entityName: String,
+                brand: String,
+                color: String,
+                model: String,
+                modelYear: Int32,
+                pricePerDay: Decimal,
+                imageName: String?,
+                hasAircondition: Bool,
+                numberOfSeats: Int32,
+                trunkSize: Int32
     ) {
         let description = NSEntityDescription.entity(forEntityName: entityName, in: context)!
         super.init(entity: description, insertInto: context)
@@ -193,16 +193,16 @@ public class Vehicle: NSManagedObject, IVehicle {
     
     // Motorcycle initializer
     public init(context: NSManagedObjectContext,
-         entityName: String,
-         brand: String,
-         color: String,
-         model: String,
-         modelYear: Int32,
-         pricePerDay: Decimal,
-         imageName: String?,
-         hasWindshield: Bool,
-         trunkSizes: [Int32],
-         type: MotorcycleType
+                entityName: String,
+                brand: String,
+                color: String,
+                model: String,
+                modelYear: Int32,
+                pricePerDay: Decimal,
+                imageName: String?,
+                hasWindshield: Bool,
+                trunkSizes: [Int32],
+                type: MotorcycleType
     ) {
         let description = NSEntityDescription.entity(forEntityName: entityName, in: context)!
         super.init(entity: description, insertInto: context)
@@ -229,9 +229,9 @@ public class Vehicle: NSManagedObject, IVehicle {
     ///   - trunkSizes: The list of the sizes of trunks mounted on the motorcycle
     ///   - type: Whether the vehicle is a motorcycle or a scooter
     public func setMotorcycleRole(context: NSManagedObjectContext,
-                           hasWindshield: Bool,
-                           trunkSizes: [Int32],
-                           type: MotorcycleType
+                                  hasWindshield: Bool,
+                                  trunkSizes: [Int32],
+                                  type: MotorcycleType
     ) {
         if self.automobile == nil && self.motorcycle == nil {
             self.motorcycle = MotorcycleVehicle(context: context,
@@ -248,9 +248,9 @@ public class Vehicle: NSManagedObject, IVehicle {
     ///   - numberOfSeats: The number of available seats
     ///   - trunkSize: The size of the trunk
     public func setAutomobileRole(context: NSManagedObjectContext,
-                           hasAircondition: Bool,
-                           numberOfSeats: Int32,
-                           trunkSize: Int32
+                                  hasAircondition: Bool,
+                                  numberOfSeats: Int32,
+                                  trunkSize: Int32
     ) {
         if self.automobile == nil && self.motorcycle == nil {
             self.automobile = AutomobileVehicle(context: context,

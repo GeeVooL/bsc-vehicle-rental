@@ -31,7 +31,7 @@ public class ElectricEngineVehicle: Vehicle, IElectricEngineVehicle, Manageable 
     @NSManaged var range: Int32
     
     // MARK: - Initializers
-
+    
     // Automobile variant initializer
     public init(context: NSManagedObjectContext,
                 brand: String,
@@ -154,8 +154,8 @@ public class ElectricEngineVehicle: Vehicle, IElectricEngineVehicle, Manageable 
                 "Range": "\(self.range) km",
             ]
         }
-                
+        
         return [:]
     }
-
+    
 }

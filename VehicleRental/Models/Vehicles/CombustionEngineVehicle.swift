@@ -29,20 +29,20 @@ public class CombustionEngineVehicle: Vehicle, ICombustionEngineVehicle, Managea
     @NSManaged var tankCapacity: Int32
     
     // MARK: - Initializers
-
+    
     // Automobile variant initializer
     public init(context: NSManagedObjectContext,
-                            brand: String,
-                            color: String,
-                            model: String,
-                            modelYear: Int32,
-                            pricePerDay: Decimal,
-                            imageName: String?,
-                            hasAircondition: Bool,
-                            numberOfSeats: Int32,
-                            trunkSize: Int32,
-                            averageFuelConsumption: Float,
-                            tankCapacity: Int32
+                brand: String,
+                color: String,
+                model: String,
+                modelYear: Int32,
+                pricePerDay: Decimal,
+                imageName: String?,
+                hasAircondition: Bool,
+                numberOfSeats: Int32,
+                trunkSize: Int32,
+                averageFuelConsumption: Float,
+                tankCapacity: Int32
     ) {
         super.init(context: context,
                    entityName: "CombustionEngineVehicle",

@@ -28,7 +28,7 @@ public class Customer: NSManagedObject, Manageable {
     
     @NSManaged private var person: Person?
     @NSManaged private var rentals: Set<Rental>?
-
+    
     // MARK: - CoreData helpers
     
     @objc(addRentalsObject:)
@@ -78,7 +78,7 @@ public class Customer: NSManagedObject, Manageable {
         for rental in rentals! {
             rental.removeFromAll()
         }
-                
+        
         context.delete(self)
         
         do {

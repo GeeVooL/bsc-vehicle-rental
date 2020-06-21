@@ -26,7 +26,7 @@ struct VehicleListRow: View {
                 Image(vehicle.imageName ?? "missing")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 50, height: 50)
+                    .frame(width: 65, height: 65)
                     .clipped()
                     .cornerRadius(10)
                 VStack(alignment: .leading) {

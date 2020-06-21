@@ -29,7 +29,7 @@ public class InvoiceItem: NSManagedObject, Manageable {
     }
     
     @NSManaged public var invoice: Invoice?
-
+    
     // MARK: - Initializers
     
     // Loader initializer

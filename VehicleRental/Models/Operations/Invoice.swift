@@ -85,7 +85,7 @@ public class Invoice: NSManagedObject, Manageable {
         self.init(context: context)
         setService(service: service)
     }
-
+    
     // MARK: - Helpers
     
     public func addItem(context: NSManagedObjectContext, name: String, netPrice: Decimal, taxRate: Decimal?) {

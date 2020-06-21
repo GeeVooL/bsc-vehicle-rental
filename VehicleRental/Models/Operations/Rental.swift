@@ -45,11 +45,11 @@ public class Rental: NSManagedObject, Manageable {
     }
     
     public init(context: NSManagedObjectContext,
-         customer: Customer,
-         vehicle: Vehicle,
-         reservationCode: String,
-         rentDate: Date,
-         returnDate: Date
+                customer: Customer,
+                vehicle: Vehicle,
+                reservationCode: String,
+                rentDate: Date,
+                returnDate: Date
     ) {
         let description = NSEntityDescription.entity(forEntityName: "Rental", in: context)!
         super.init(entity: description, insertInto: context)
@@ -81,7 +81,7 @@ public class Rental: NSManagedObject, Manageable {
         
         return true
     }
-
+    
     // MARK: - Business logic
     
     /// Create a unique reservation code
@@ -115,7 +115,7 @@ public class Rental: NSManagedObject, Manageable {
     public func getRentDate() -> Date {
         return rentDate!
     }
-
+    
     /// Get the last day of the rental
     /// - Returns: End date of the rental
     public func getReturnDate() -> Date {

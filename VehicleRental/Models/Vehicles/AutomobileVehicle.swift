@@ -23,7 +23,7 @@ public class AutomobileVehicle: NSManagedObject {
     @NSManaged var trunkSize: Int32
     
     @NSManaged private var vehicle: Vehicle?
-
+    
     // MARK: - Initializers
     
     // Loader initializer
@@ -44,5 +44,5 @@ public class AutomobileVehicle: NSManagedObject {
         self.numberOfSeats = numberOfSeats
         self.trunkSize = trunkSize
     }
-
+    
 }

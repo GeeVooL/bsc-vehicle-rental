@@ -52,7 +52,7 @@ public class BranchOffice: NSManagedObject, Manageable {
     
     @objc(removeVehicles:)
     @NSManaged public func removeFromVehicles(_ values: Set<Vehicle>)
-
+    
     // MARK: - Initializers
     
     // Loader initializer
@@ -62,9 +62,9 @@ public class BranchOffice: NSManagedObject, Manageable {
     }
     
     public init(context: NSManagedObjectContext,
-         name: String,
-         garageCapacity: Int32,
-         address: Address
+                name: String,
+                garageCapacity: Int32,
+                address: Address
     ) {
         let description = NSEntityDescription.entity(forEntityName: "BranchOffice", in: context)!
         super.init(entity: description, insertInto: context)

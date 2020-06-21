@@ -57,5 +57,5 @@ public class MotorcycleVehicle: NSManagedObject {
         self.trunkSizes = trunkSizes
         self.type = type
     }
-
+    
 }
