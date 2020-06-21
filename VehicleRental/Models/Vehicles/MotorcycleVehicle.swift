@@ -9,56 +9,53 @@
 import Foundation
 import CoreData
 
-class MotorcycleVehicle: Vehicle, IncludingPersistentExtension {
-    typealias EntityType = MotorcycleVehicleEntity
+@objc
+public enum MotorcycleType: Int32 {
+    case motorcycle = 0
+    case scooter    = 1
     
-    enum MotorcycleType: Int32 {
-        case scooter, motorbike
+    var name: String {
+        switch self {
+        case .motorcycle: return "Motorcycle"
+        case .scooter: return "Scooter"
+        }
+    }
+}
+
+@objc(MotorcycleVehicle)
+public class MotorcycleVehicle: NSManagedObject {
+    
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<MotorcycleVehicle> {
+        return NSFetchRequest<MotorcycleVehicle>(entityName: "MotorcycleVehicle")
     }
     
-    static var all = PersistentClassExtension<MotorcycleVehicle>()
+    // MARK: - Attributes
     
-    let brand: String
-    let model: String
-    let modelYear: Int32
-    let color: String
-    var pricePerDay: Decimal
-    let type: MotorcycleType
-    var hasWindshield: Bool
-    var trunkSizes: [Int32]
+    @NSManaged var hasWindshield: Bool
+    @NSManaged var trunkSizes: [Int32]?
+    @NSManaged var type: MotorcycleType
     
-    init(brand: String, model: String, modelYear: Int32, colour: String, pricePerDay: Decimal, type: MotorcycleVehicle.MotorcycleType, hasWindshield: Bool, trunkSizes: [Int32]) {
-        self.brand = brand
-        self.model = model
-        self.modelYear = modelYear
-        self.color = colour
-        self.pricePerDay = pricePerDay
-        self.type = type
+    @NSManaged private var vehicle: Vehicle?
+    
+    // MARK: - Initializers
+    
+    // Loader initializer
+    @objc
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    init(context: NSManagedObjectContext,
+         hasWindshield: Bool,
+         trunkSizes: [Int32],
+         type: MotorcycleType
+    ) {
+        let description = NSEntityDescription.entity(forEntityName: "MotorcycleVehicle", in: context)!
+        super.init(entity: description, insertInto: context)
+        
         self.hasWindshield = hasWindshield
         self.trunkSizes = trunkSizes
-        MotorcycleVehicle.all.add(object: self)
+        self.type = type
     }
-    
-    required convenience init(from object: NSManagedObject) throws {
-        let entity = object as! EntityType
-        self.init(brand: entity.brand!, model: entity.model!, modelYear: entity.modelYear, colour: entity.color!, pricePerDay: entity.pricePerDay! as Decimal, type: MotorcycleType(rawValue: entity.type)!, hasWindshield: entity.hasWindshield, trunkSizes: entity.trunkSizes!)
-    }
-    
-    deinit {
-        MotorcycleVehicle.all.remove(object: self)
-    }
-    
-    func save(context: NSManagedObjectContext) throws {
-        let entity = MotorcycleVehicleEntity(context: context)
-        entity.brand = brand
-        entity.model = model
-        entity.modelYear = modelYear
-        entity.color = color
-        entity.pricePerDay = pricePerDay as NSDecimalNumber
-        entity.type = type.rawValue
-        entity.hasWindshield = hasWindshield
-        entity.trunkSizes = trunkSizes
-        context.insert(entity)
-        try context.save()
-    }
+
 }

@@ -9,10 +9,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selectedView = 1
+    
     var body: some View {
-        Text("Hello, World!")
+        TabView(selection: $selectedView) {
+            NavigationView {
+                VehicleFilterView()
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .tabItem {
+                Image(systemName: "calendar.badge.plus")
+                Text("Reserve")
+            }.tag(1)
+            
+            Text("Not implemented").tabItem {
+                Image(systemName: "calendar")
+                Text("My rentals")
+            }.tag(2)
+            
+            Text("Not implemented").tabItem {
+                Image(systemName: "tray.and.arrow.down.fill")
+                Text("Notifications")
+            }.tag(3)
+        }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

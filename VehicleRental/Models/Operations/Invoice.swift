@@ -9,34 +9,113 @@
 import Foundation
 import CoreData
 
-final class Invoice: IncludingPersistentExtension {
-    typealias EntityType = InvoiceEntity
+@objc(Invoice)
+public class Invoice: NSManagedObject, Manageable {
     
-    static var all = PersistentClassExtension<Invoice>()
-    
-    let id: Int32
-    // TODO(mDevv): implement the below properties when the associations are done
-    var totalNet: Decimal?
-    var totalGross: Decimal?
-    
-    init(id: Int32) {
-        self.id = id
-        Invoice.all.add(object: self)
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Invoice> {
+        return NSFetchRequest<Invoice>(entityName: "Invoice")
     }
     
-    required convenience init(from object: NSManagedObject) throws {
-        let entity = object as! EntityType
-        self.init(id: entity.id)
+    public static var all: [Invoice] = []
+    
+    // MARK: - Attributes
+    
+    @NSManaged var id: String?
+    
+    @NSManaged var items: Set<InvoiceItem>?
+    @NSManaged private var rental: Rental?
+    @NSManaged private var service: Service?
+    
+    var netPrice: Decimal {
+        var sum = Decimal(0)
+        if let items = items {
+            for item in items {
+                sum += (item.netPrice! as Decimal)
+            }
+        }
+        return sum
     }
     
-    deinit {
-        Invoice.all.add(object: self)
+    var grossPrice: Decimal {
+        var sum = Decimal(0)
+        if let items = items {
+            for item in items {
+                sum += (item.grossPrice)
+            }
+        }
+        return sum
     }
     
-    func save(context: NSManagedObjectContext) throws {
-        let entity = InvoiceEntity(context: context)
-        entity.id = id
-        context.insert(entity)
-        try context.save()
+    // MARK: - CoreData helpers
+    
+    @objc(addItemsObject:)
+    @NSManaged public func addToItems(_ value: InvoiceItem)
+    
+    @objc(removeItemsObject:)
+    @NSManaged public func removeFromItems(_ value: InvoiceItem)
+    
+    @objc(addItems:)
+    @NSManaged public func addToItems(_ values: Set<InvoiceItem>)
+    
+    @objc(removeItems:)
+    @NSManaged public func removeFromItems(_ values: Set<InvoiceItem>)
+    
+    // MARK: - Initializers
+    
+    // Loader initializer
+    @objc
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    public init(context: NSManagedObjectContext) {
+        let description = NSEntityDescription.entity(forEntityName: "Invoice", in: context)!
+        super.init(entity: description, insertInto: context)
+        addToAll()
+        
+        self.id = UUID().uuidString
+    }
+    
+    public convenience init(context: NSManagedObjectContext, rental: Rental) {
+        self.init(context: context)
+        setRental(rental: rental)
+    }
+    
+    public convenience init(context: NSManagedObjectContext, service: Service) {
+        self.init(context: context)
+        setService(service: service)
+    }
+
+    // MARK: - Helpers
+    
+    public func addItem(context: NSManagedObjectContext, name: String, netPrice: Decimal, taxRate: Decimal?) {
+        let _ = InvoiceItem.createInvoiceItem(context: context, invoice: self, name: name, netPrice: netPrice, taxRate: taxRate)
+    }
+    
+    public func setService(service: Service) {
+        if rental == nil {
+            self.service = service
+        }
+    }
+    
+    public func getService() -> Service? {
+        return self.service
+    }
+    
+    public func setRental(rental: Rental) {
+        if service == nil {
+            self.rental = rental
+        }
+    }
+    
+    public func getRental() -> Rental? {
+        return self.rental
+    }
+    
+    // MARK: - Business logic
+    
+    /// Apply the customer's discount to the invoice
+    public func discount() {
+        // TODO(mDevv): Implement me
     }
 }

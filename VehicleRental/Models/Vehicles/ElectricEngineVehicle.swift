@@ -9,52 +9,153 @@
 import Foundation
 import CoreData
 
-class ElectricEngineVehicle: Vehicle, IncludingPersistentExtension {
-    typealias EntityType = ElectricEngineVehicleEntity
+protocol IElectricEngineVehicle: IVehicle {
+    var batteryCapacity: Int32 { get set }
+    var chargingTime: Int32 { get set }
+    var range: Int32 { get set }
+}
+
+@objc(ElectricEngineVehicle)
+public class ElectricEngineVehicle: Vehicle, IElectricEngineVehicle, Manageable {
     
-    static var all = PersistentClassExtension<ElectricEngineVehicle>()
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<ElectricEngineVehicle> {
+        return NSFetchRequest<ElectricEngineVehicle>(entityName: "ElectricEngineVehicle")
+    }
     
-    let brand: String
-    let model: String
-    let modelYear: Int32
-    let color: String
-    var pricePerDay: Decimal
-    let batteryCapacity: Double
-    let chargingTime: Int32
-    let range: Int32
+    public static var all: [ElectricEngineVehicle] = []
     
-    init(brand: String, model: String, modelYear: Int32, colour: String, pricePerDay: Decimal, batteryCapacity: Double, chargingTime: Int32, range: Int32) {
-        self.brand = brand
-        self.model = model
-        self.modelYear = modelYear
-        self.color = colour
-        self.pricePerDay = pricePerDay
+    // MARK: - Attributes
+    
+    @NSManaged var batteryCapacity: Int32
+    @NSManaged var chargingTime: Int32
+    @NSManaged var range: Int32
+    
+    // MARK: - Initializers
+
+    // Automobile variant initializer
+    public init(context: NSManagedObjectContext,
+                brand: String,
+                color: String,
+                model: String,
+                modelYear: Int32,
+                pricePerDay: Decimal,
+                imageName: String?,
+                hasAircondition: Bool,
+                numberOfSeats: Int32,
+                trunkSize: Int32,
+                batteryCapacity: Int32,
+                chargingTime: Int32,
+                range: Int32
+    ) {
+        super.init(context: context,
+                   entityName: "ElectricEngineVehicle",
+                   brand: brand,
+                   color: color,
+                   model: model,
+                   modelYear: modelYear,
+                   pricePerDay: pricePerDay,
+                   imageName: imageName,
+                   hasAircondition: hasAircondition,
+                   numberOfSeats: numberOfSeats,
+                   trunkSize: trunkSize)
+        addToAll()
+        
         self.batteryCapacity = batteryCapacity
         self.chargingTime = chargingTime
         self.range = range
-        ElectricEngineVehicle.all.add(object: self)
     }
     
-    required convenience init(from object: NSManagedObject) throws {
-        let entity = object as! EntityType
-        self.init(brand: entity.brand!, model: entity.model!, modelYear: entity.modelYear, colour: entity.color!, pricePerDay: entity.pricePerDay! as Decimal, batteryCapacity: entity.batteryCapacity, chargingTime: entity.chargingTime, range: entity.range)
+    // Motorcycle variant initializer
+    public init(context: NSManagedObjectContext,
+                brand: String,
+                color: String,
+                model: String,
+                modelYear: Int32,
+                pricePerDay: Decimal,
+                imageName: String?,
+                hasWindshield: Bool,
+                trunkSizes: [Int32],
+                type: MotorcycleType,
+                batteryCapacity: Int32,
+                chargingTime: Int32,
+                range: Int32
+    ) {
+        super.init(context: context,
+                   entityName: "ElectricEngineVehicle",
+                   brand: brand,
+                   color: color,
+                   model: model,
+                   modelYear: modelYear,
+                   pricePerDay: pricePerDay,
+                   imageName: imageName,
+                   hasWindshield: hasWindshield,
+                   trunkSizes: trunkSizes,
+                   type: type)
+        addToAll()
+        
+        self.batteryCapacity = batteryCapacity
+        self.chargingTime = chargingTime
+        self.range = range
     }
     
-    deinit {
-        ElectricEngineVehicle.all.remove(object: self)
+    // MARK: - Helpers
+    
+    public func delete(context: NSManagedObjectContext) {
+        self.removeFromAll()
+        for rental in self.rentals! {
+            rental.removeFromAll()
+        }
+        for service in self.services! {
+            service.removeFromAll()
+        }
+        
+        context.delete(self)
+        
+        do {
+            try context.save()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
     }
     
-    func save(context: NSManagedObjectContext) throws {
-        let entity = ElectricEngineVehicleEntity(context: context)
-        entity.brand = brand
-        entity.model = model
-        entity.modelYear = modelYear
-        entity.color = color
-        entity.pricePerDay = pricePerDay as NSDecimalNumber
-        entity.batteryCapacity = batteryCapacity
-        entity.chargingTime = chargingTime
-        entity.range = range
-        context.insert(entity)
-        try context.save()
+    // MARK: - Business logic
+    
+    /// Get the vehicle details as a dictionary
+    /// - Returns: The details of electric engine vehicle
+    public override func getDetails() -> [String: String] {
+        if self.motorcycle != nil {
+            var sizesStr = ""
+            if (trunkSizes!.count == 0) {
+                sizesStr = "N/A"
+            } else {
+                for size in trunkSizes! {
+                    sizesStr.append("\(size) L, ")
+                }
+                sizesStr = sizesStr.trimmingCharacters(in: .whitespaces)
+                sizesStr = sizesStr.trimmingCharacters(in: CharacterSet(charactersIn: ","))
+            }
+            
+            return [
+                "Windshield": self.hasWindshield! ? "Yes" : "No",
+                "Trunk sizes": sizesStr,
+                "Type": self.type!.name,
+                "Battery capacity": "\(self.batteryCapacity) kWh",
+                "Charging time": "\(self.chargingTime) minutes",
+                "Range": "\(self.range) km",
+            ]
+        } else if self.automobile != nil {
+            return [
+                "Aircondition": self.hasAircondition! ? "Yes" : "No",
+                "Number of seats": "\(self.numberOfSeats!)",
+                "Trunk size": "\(self.trunkSize!) L",
+                "Battery capacity": "\(self.batteryCapacity) kWh",
+                "Charging time": "\(self.chargingTime) minutes",
+                "Range": "\(self.range) km",
+            ]
+        }
+                
+        return [:]
     }
+
 }

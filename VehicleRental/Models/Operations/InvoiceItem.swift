@@ -9,37 +9,55 @@
 import Foundation
 import CoreData
 
-final class InvoiceItem: IncludingPersistentExtension {
-    typealias EntityType = InvoiceItemEntity
+@objc(InvoiceItem)
+public class InvoiceItem: NSManagedObject, Manageable {
     
-    static var all = PersistentClassExtension<InvoiceItem>()
-    static let vatTax = 0.23
-    
-    let name: String
-    let netPrice: Decimal
-    var grossPrice: Decimal { netPrice * (Decimal(1) + Decimal(InvoiceItem.vatTax)) }
-    
-    init(name: String, netPrice: Decimal) {
-        self.name = name
-        self.netPrice = netPrice
-        InvoiceItem.all.add(object: self)
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<InvoiceItem> {
+        return NSFetchRequest<InvoiceItem>(entityName: "InvoiceItem")
     }
     
-    required convenience init(from object: NSManagedObject) throws {
-        let entity = object as! EntityType
-        self.init(name: entity.name!, netPrice: entity.netPrice! as Decimal)
+    public static var all: [InvoiceItem] = []
+    
+    // MARK: - Attributes
+    
+    @NSManaged var name: String?
+    @NSManaged var netPrice: NSDecimalNumber?
+    @NSManaged var taxRate: NSDecimalNumber?
+    
+    var grossPrice: Decimal {
+        netPrice! as Decimal * (Decimal(integerLiteral: 1) + (taxRate! as Decimal))
     }
     
-    deinit {
-        InvoiceItem.all.remove(object: self)
-    }
-    
-    func save(context: NSManagedObjectContext) throws {
-        let entity = InvoiceItemEntity(context: context)
-        entity.name = name
-        entity.netPrice = netPrice as NSDecimalNumber
-        context.insert(entity)
-        try context.save()
-    }
+    @NSManaged public var invoice: Invoice?
 
+    // MARK: - Initializers
+    
+    // Loader initializer
+    @objc
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    private init(context: NSManagedObjectContext, name: String, netPrice: Decimal, taxRate: Decimal?) {
+        let description = NSEntityDescription.entity(forEntityName: "InvoiceItem", in: context)!
+        super.init(entity: description, insertInto: context)
+        addToAll()
+        
+        self.name = name
+        self.netPrice = netPrice as NSDecimalNumber
+        self.taxRate = taxRate as NSDecimalNumber? ?? 0.23
+    }
+    
+    // MARK: - Helpers
+    
+    public static func createInvoiceItem(context: NSManagedObjectContext,
+                                         invoice: Invoice,
+                                         name: String,
+                                         netPrice: Decimal,
+                                         taxRate: Decimal?) -> InvoiceItem {
+        let item = InvoiceItem(context: context, name: name, netPrice: netPrice, taxRate: taxRate)
+        item.invoice = invoice
+        return item
+    }
+    
 }

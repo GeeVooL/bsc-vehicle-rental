@@ -11,35 +11,15 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    private var persistenceManager: PersistenceManager?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        persistenceManager = PersistenceManager(persistentContainer: persistentContainer)
-        persistenceManager?.loadAll()
+        let context = persistentContainer.viewContext
+        let persistenceManager = PersistenceManager(managedContext: context)
+        persistenceManager.loadAll()
         
-        let firstMiniProject = FirstMiniProject(persistentContainer: persistentContainer)
-        print("===EXTENSIONS===")
-        firstMiniProject.checkExampleExtensions()
-        print("===PERSISTENT EXTENSION===")
-        firstMiniProject.checkPersistentExtension()
-        print("===COMPLEX PROPERTY===")
-        firstMiniProject.checkStructProperty()
-        print("===OPTIONAL PROPERTY===")
-        firstMiniProject.checkOptionalProperty()
-        print("===REPETITIVE PROPERTY===")
-        firstMiniProject.checkRepetitiveProperty()
-        print("===CLASS PROPERTY===")
-        firstMiniProject.checkClassProperty()
-        print("===COMPUTED PROPERTY===")
-        firstMiniProject.checkComputedProperty()
-        print("===CLASS METHOD===")
-        firstMiniProject.checkClassMethod()
-        print("===OVERLOADING===")
-        firstMiniProject.checkOverloading()
-        print("===OVERRIDING===")
-        firstMiniProject.checkOverriding()
-        
+        // Run this only once to preload data
+        // persistenceManager.preloadData()
+
         return true
     }
 
@@ -58,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
         
     func applicationWillTerminate(_ application: UIApplication) {
-        persistenceManager?.saveAll()
         self.saveContext()
     }
 

@@ -1,92 +1,144 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AutomobileVehicleEntity" representedClassName="AutomobileVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Address" representedClassName="Address" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="postCode" optional="YES" attributeType="String"/>
+        <attribute name="street" optional="YES" attributeType="String"/>
+        <relationship name="office" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BranchOffice" inverseName="address" inverseEntity="BranchOffice"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="address" inverseEntity="Person"/>
+    </entity>
+    <entity name="AutomobileVehicle" representedClassName="AutomobileVehicle" syncable="YES">
         <attribute name="hasAircondition" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="numberOfSeats" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="trunkSize" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="automobile" inverseEntity="Vehicle"/>
     </entity>
-    <entity name="BranchOfficeEntity" representedClassName="BranchOfficeEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="address" attributeType="String" customClassName="Address"/>
+    <entity name="BranchOffice" representedClassName="BranchOffice" syncable="YES">
         <attribute name="garageCapacity" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="address" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Address" inverseName="office" inverseEntity="Address"/>
+        <relationship name="employees" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="offices" inverseEntity="Employee"/>
+        <relationship name="vehicles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="office" inverseEntity="Vehicle"/>
     </entity>
-    <entity name="CombustionEngineVehicleEntity" representedClassName="CombustionEngineVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="averageFuelConsumption" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="tankCapacity" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    <entity name="CombustionEngineVehicle" representedClassName="CombustionEngineVehicle" parentEntity="Vehicle" syncable="YES">
+        <attribute name="averageFuelConsumption" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="tankCapacity" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="CustomerEntity" representedClassName="CustomerEntity" parentEntity="PersonEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="discount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    <entity name="Customer" representedClassName="Customer" syncable="YES">
+        <attribute name="discount" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isRenting" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="registrationDate" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="customer" inverseEntity="Person"/>
+        <relationship name="rentals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Rental" inverseName="customer" inverseEntity="Rental"/>
     </entity>
-    <entity name="CustomerServiceEmployeeEntity" representedClassName="CustomerServiceEmployeeEntity" parentEntity="EmployeeEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="staticBonusPerOrder" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    <entity name="CustomerServiceEmployee" representedClassName="CustomerServiceEmployee" syncable="YES">
         <attribute name="totalOrders" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="employee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="customerServiceEmployee" inverseEntity="Employee"/>
     </entity>
-    <entity name="ElectricEngineVehicleEntity" representedClassName="ElectricEngineVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="batteryCapacity" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    <entity name="ElectricEngineVehicle" representedClassName="ElectricEngineVehicle" parentEntity="Vehicle" syncable="YES">
+        <attribute name="batteryCapacity" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="chargingTime" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="range" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="EmployeeEntity" representedClassName="EmployeeEntity" isAbstract="YES" parentEntity="PersonEntity" syncable="YES" codeGenerationType="class">
+    <entity name="Employee" representedClassName="Employee" syncable="YES">
         <attribute name="baseSalary" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="employmentDate" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="customerServiceEmployee" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CustomerServiceEmployee" inverseName="employee" inverseEntity="CustomerServiceEmployee"/>
+        <relationship name="offices" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="BranchOffice" inverseName="employees" inverseEntity="BranchOffice"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="employee" inverseEntity="Person"/>
+        <relationship name="technician" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Technician" inverseName="employee" inverseEntity="Technician"/>
     </entity>
-    <entity name="HybridVehicleEntity" representedClassName="HybridVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
+    <entity name="HybridVehicle" representedClassName="HybridVehicle" parentEntity="Vehicle" syncable="YES">
+        <attribute name="averageFuelConsumption" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="batteryCapacity" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="chargingTime" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="hybridType" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="maxSpeedUsingElectricEngine" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="type" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="range" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tankCapacity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="InvoiceEntity" representedClassName="InvoiceEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    <entity name="Invoice" representedClassName="Invoice" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="InvoiceItem" inverseName="invoice" inverseEntity="InvoiceItem"/>
+        <relationship name="rental" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Rental" inverseName="invoice" inverseEntity="Rental"/>
+        <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Service" inverseName="invoice" inverseEntity="Service"/>
     </entity>
-    <entity name="InvoiceItemEntity" representedClassName="InvoiceItemEntity" syncable="YES" codeGenerationType="class">
+    <entity name="InvoiceItem" representedClassName="InvoiceItem" syncable="YES">
         <attribute name="name" attributeType="String"/>
         <attribute name="netPrice" attributeType="Decimal" defaultValueString="0.0"/>
-        <attribute name="staticVatTax" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="taxRate" optional="YES" attributeType="Decimal"/>
+        <relationship name="invoice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invoice" inverseName="items" inverseEntity="Invoice"/>
     </entity>
-    <entity name="MotorcycleVehicleEntity" representedClassName="MotorcycleVehicleEntity" parentEntity="VehicleEntity" syncable="YES" codeGenerationType="class">
+    <entity name="MotorcycleVehicle" representedClassName="MotorcycleVehicle" syncable="YES">
         <attribute name="hasWindshield" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="trunkSizes" attributeType="Transformable" customClassName="[Int32]"/>
         <attribute name="type" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="motorcycle" inverseEntity="Vehicle"/>
     </entity>
-    <entity name="PersonEntity" representedClassName="PersonEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
-        <attribute name="address" attributeType="String" defaultValueString="" customClassName="Address"/>
+    <entity name="Person" representedClassName="Person" syncable="YES">
         <attribute name="birthDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="email" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="personType" optional="YES" attributeType="Transformable" customClassName="[Int32]"/>
         <attribute name="phone" attributeType="String"/>
         <attribute name="surname" attributeType="String"/>
+        <relationship name="address" maxCount="1" deletionRule="Cascade" destinationEntity="Address" inverseName="person" inverseEntity="Address"/>
+        <relationship name="customer" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Customer" inverseName="person" inverseEntity="Customer"/>
+        <relationship name="employee" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Employee" inverseName="person" inverseEntity="Employee"/>
     </entity>
-    <entity name="RentalEntity" representedClassName="RentalEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="plannedReturnDate" attributeType="Date" usesScalarValueType="NO"/>
+    <entity name="Rental" representedClassName="Rental" syncable="YES">
         <attribute name="rentDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="reservationCode" optional="YES" attributeType="String"/>
+        <attribute name="returnDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="state" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="customer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Customer" inverseName="rentals" inverseEntity="Customer"/>
+        <relationship name="invoice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invoice" inverseName="rental" inverseEntity="Invoice"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="rentals" inverseEntity="Vehicle"/>
     </entity>
-    <entity name="ServiceEntity" representedClassName="ServiceEntity" syncable="YES" codeGenerationType="class">
+    <entity name="Service" representedClassName="Service" syncable="YES">
         <attribute name="issueDescription" attributeType="String"/>
         <attribute name="serviceDate" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="invoice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invoice" inverseName="service" inverseEntity="Invoice"/>
+        <relationship name="technician" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Technician" inverseName="services" inverseEntity="Technician"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="services" inverseEntity="Vehicle"/>
     </entity>
-    <entity name="TechnicianEntity" representedClassName="TechnicianEntity" parentEntity="EmployeeEntity" syncable="YES" codeGenerationType="class"/>
-    <entity name="VehicleEntity" representedClassName="VehicleEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
+    <entity name="Technician" representedClassName="Technician" syncable="YES">
+        <attribute name="specialization" optional="YES" attributeType="Integer 32" minValueString="0" maxValueString="2" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="employee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="technician" inverseEntity="Employee"/>
+        <relationship name="services" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Service" inverseName="technician" inverseEntity="Service"/>
+    </entity>
+    <entity name="Vehicle" representedClassName="Vehicle" isAbstract="YES" syncable="YES">
         <attribute name="brand" attributeType="String"/>
         <attribute name="color" attributeType="String"/>
+        <attribute name="imageName" optional="YES" attributeType="String"/>
         <attribute name="model" attributeType="String"/>
         <attribute name="modelYear" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="pricePerDay" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="state" optional="YES" attributeType="Integer 32" minValueString="0" maxValueString="1" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="automobile" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AutomobileVehicle" inverseName="vehicle" inverseEntity="AutomobileVehicle"/>
+        <relationship name="motorcycle" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MotorcycleVehicle" inverseName="vehicle" inverseEntity="MotorcycleVehicle"/>
+        <relationship name="office" maxCount="1" deletionRule="Nullify" destinationEntity="BranchOffice" inverseName="vehicles" inverseEntity="BranchOffice"/>
+        <relationship name="rentals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Rental" inverseName="vehicle" inverseEntity="Rental"/>
+        <relationship name="services" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Service" inverseName="vehicle" inverseEntity="Service"/>
     </entity>
     <elements>
-        <element name="AutomobileVehicleEntity" positionX="36" positionY="144" width="128" height="88"/>
-        <element name="BranchOfficeEntity" positionX="0" positionY="99" width="128" height="73"/>
-        <element name="CombustionEngineVehicleEntity" positionX="27" positionY="144" width="128" height="73"/>
-        <element name="CustomerEntity" positionX="-63" positionY="-18" width="128" height="73"/>
-        <element name="CustomerServiceEmployeeEntity" positionX="-36" positionY="36" width="128" height="73"/>
-        <element name="ElectricEngineVehicleEntity" positionX="-18" positionY="90" width="128" height="88"/>
-        <element name="EmployeeEntity" positionX="9" positionY="126" width="128" height="73"/>
-        <element name="HybridVehicleEntity" positionX="18" positionY="126" width="128" height="73"/>
-        <element name="InvoiceEntity" positionX="18" positionY="117" width="128" height="58"/>
-        <element name="InvoiceItemEntity" positionX="27" positionY="126" width="128" height="88"/>
-        <element name="MotorcycleVehicleEntity" positionX="27" positionY="135" width="128" height="88"/>
-        <element name="PersonEntity" positionX="0" positionY="99" width="128" height="133"/>
-        <element name="RentalEntity" positionX="9" positionY="108" width="128" height="73"/>
-        <element name="ServiceEntity" positionX="-9" positionY="90" width="128" height="73"/>
-        <element name="TechnicianEntity" positionX="9" positionY="63" width="128" height="43"/>
-        <element name="VehicleEntity" positionX="-9" positionY="99" width="128" height="118"/>
+        <element name="Address" positionX="-24.66015625" positionY="-472.74609375" width="128" height="133"/>
+        <element name="AutomobileVehicle" positionX="-819.828125" positionY="11.3515625" width="128" height="103"/>
+        <element name="BranchOffice" positionX="-546.37109375" positionY="-362.36328125" width="128" height="118"/>
+        <element name="CombustionEngineVehicle" positionX="-686.9296875" positionY="388.24609375" width="128" height="73"/>
+        <element name="Customer" positionX="175.453125" positionY="-197.48046875" width="128" height="118"/>
+        <element name="CustomerServiceEmployee" positionX="184.0703125" positionY="61.8828125" width="128" height="73"/>
+        <element name="ElectricEngineVehicle" positionX="-413.25" positionY="363.7734375" width="128" height="88"/>
+        <element name="Employee" positionX="375.59765625" positionY="-143.59375" width="128" height="133"/>
+        <element name="HybridVehicle" positionX="-545.890625" positionY="460.05859375" width="128" height="148"/>
+        <element name="Invoice" positionX="-261.328125" positionY="96.640625" width="128" height="103"/>
+        <element name="InvoiceItem" positionX="9.734375" positionY="75.37890625" width="128" height="103"/>
+        <element name="MotorcycleVehicle" positionX="-816.44921875" positionY="219.47265625" width="128" height="103"/>
+        <element name="Person" positionX="349.49609375" positionY="-399.625" width="128" height="178"/>
+        <element name="Rental" positionX="-287.74609375" positionY="-143.3203125" width="128" height="148"/>
+        <element name="Service" positionX="-86.3515625" positionY="287.62890625" width="128" height="118"/>
+        <element name="Technician" positionX="393.640625" positionY="118.69921875" width="128" height="88"/>
+        <element name="Vehicle" positionX="-542.1171875" positionY="40.25" width="128" height="223"/>
     </elements>
 </model>

@@ -9,65 +9,81 @@
 import Foundation
 import CoreData
 
-final class Technician: Employee, IncludingPersistentExtension {
-    typealias EntityType = TechnicianEntity
+@objc
+public enum TechnicianSpecialization: Int32 {
+    case electronics    = 0
+    case mechanics      = 1
+    case vulcanization  = 2
+}
+
+@objc(Technician)
+public class Technician: NSManagedObject, Manageable {
     
-    static var all = PersistentClassExtension<Technician>()
-    
-    let name: String
-    let surname: String
-    let birthDate: Date
-    var address: Address
-    var email: String
-    var phone: String
-    let employmentDate: Date
-    var baseSalary: Decimal
-    
-    init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal) {
-        self.name = name
-        self.surname = surname
-        self.birthDate = birthDate
-        self.address = address
-        self.email = email
-        self.phone = phone
-        self.employmentDate = employmentDate
-        self.baseSalary = baseSalary
-        Technician.all.add(object: self)
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Technician> {
+        return NSFetchRequest<Technician>(entityName: "Technician")
     }
     
-    required convenience init(from object: NSManagedObject) throws {
-        let entity = object as! EntityType
-        let addressString = try JSONDecoder().decode(Address.self, from: entity.address!.data(using: .utf8)!)
+    public static var all: [Technician] = []
+    
+    // MARK: - Attributes
+    
+    @NSManaged var specialization: TechnicianSpecialization
+    
+    @NSManaged var employee: Employee?
+    @NSManaged var services: Set<Service>?
+    
+    // MARK: - CoreData helpers
+    
+    @objc(addServicesObject:)
+    @NSManaged public func addToServices(_ value: Service)
+    
+    @objc(removeServicesObject:)
+    @NSManaged public func removeFromServices(_ value: Service)
+    
+    @objc(addServices:)
+    @NSManaged public func addToServices(_ values: Set<Service>)
+    
+    @objc(removeServices:)
+    @NSManaged public func removeFromServices(_ values: Set<Service>)
+    
+    // MARK: - Initializers
+    
+    // Loader initializer
+    @objc
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    public init(context: NSManagedObjectContext, specialization: TechnicianSpecialization) {
+        let description = NSEntityDescription.entity(forEntityName: "Technician", in: context)!
+        super.init(entity: description, insertInto: context)
+        addToAll()
         
-        self.init(name: entity.name!, surname: entity.surname!, birthDate: entity.birthDate!, address: addressString, email: entity.email!, phone: entity.phone!, employmentDate: entity.employmentDate!, baseSalary: entity.baseSalary! as Decimal)
+        self.specialization = specialization
     }
     
-    deinit {
-        Technician.all.remove(object: self)
+    // MARK: - Helpers
+    
+    public func delete(context: NSManagedObjectContext) {
+        self.removeFromAll()
+        for service in services! {
+            service.removeFromAll()
+        }
+        
+        context.delete(self)
+        
+        do {
+            try context.save()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
     }
     
-    enum Specialization {
-        case electronics, mechanics, vulcanization
-    }
+    // MARK: - Business logic
     
-    func serviceVehicle() {
+    /// Enter the information about the vehicle servicing
+    public func enterServiceData() {
         // TODO(mDevv): Implement me.
-    }
-    
-    func save(context: NSManagedObjectContext) throws {
-        let jsonAddress = try JSONEncoder().encode(address)
-        let addressString = String(data: jsonAddress, encoding: .utf8)!
-        
-        let entity = TechnicianEntity(context: context)
-        entity.name = name
-        entity.surname = surname
-        entity.birthDate = birthDate
-        entity.address = addressString
-        entity.email = email
-        entity.phone = phone
-        entity.employmentDate = employmentDate
-        entity.baseSalary = baseSalary as NSDecimalNumber
-        context.insert(entity)
-        try context.save()
     }
 }

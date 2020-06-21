@@ -9,68 +9,46 @@
 import Foundation
 import CoreData
 
-final class CustomerServiceEmployee: Employee, IncludingPersistentExtension {
-    typealias EntityType = CustomerServiceEmployeeEntity
+@objc(CustomerServiceEmployee)
+public class CustomerServiceEmployee: NSManagedObject, Manageable {
     
-    static var all = PersistentClassExtension<CustomerServiceEmployee>()
-    static let bonusPerOrder = 0.05
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CustomerServiceEmployee> {
+        return NSFetchRequest<CustomerServiceEmployee>(entityName: "CustomerServiceEmployee")
+    }
     
-    let name: String
-    let surname: String
-    let birthDate: Date
-    var address: Address
-    var email: String
-    var phone: String
-    let employmentDate: Date
-    var baseSalary: Decimal
-    var totalOrders: Int32
+    public static var all: [CustomerServiceEmployee] = []
+    
+    // MARK: - Attributes
+    
+    static let bonusPerOrder: Float = 0.05
+    @NSManaged var totalOrders: Int32
+    
+    @NSManaged var employee: Employee?
+    
     var totalBonus: Decimal {
-        baseSalary * Decimal(CustomerServiceEmployee.bonusPerOrder) * Decimal(totalOrders)
+        employee!.baseSalary! as Decimal * Decimal(Double(CustomerServiceEmployee.bonusPerOrder)) * Decimal(totalOrders)
     }
     
-    init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, employmentDate: Date, baseSalary: Decimal, totalOrders: Int32) {
-        self.name = name
-        self.surname = surname
-        self.birthDate = birthDate
-        self.address = address
-        self.email = email
-        self.phone = phone
-        self.employmentDate = employmentDate
-        self.baseSalary = baseSalary
+    // MARK: - Initializers
+    
+    // Loader initializer
+    @objc
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    public init(context: NSManagedObjectContext,
+         totalOrders: Int32) {
+        let description = NSEntityDescription.entity(forEntityName: "CustomerServiceEmployee", in: context)!
+        super.init(entity: description, insertInto: context)
+        addToAll()
+        
         self.totalOrders = totalOrders
-        CustomerServiceEmployee.all.add(object: self)
     }
     
-    required convenience init(from object: NSManagedObject) throws {
-        let entity = object as! EntityType
-        let addressString = try JSONDecoder().decode(Address.self, from: entity.address!.data(using: .utf8)!)
-        
-        self.init(name: entity.name!, surname: entity.surname!, birthDate: entity.birthDate!, address: addressString, email: entity.email!, phone: entity.phone!, employmentDate: entity.employmentDate!, baseSalary: entity.baseSalary! as Decimal, totalOrders: entity.totalOrders)
-    }
+    // MARK: - Business logic
     
-    deinit {
-        CustomerServiceEmployee.all.remove(object: self)
-    }
-    
-    // Override default implementation from protocol
-    func calculateSalary() -> Decimal { baseSalary + totalBonus }
-    
-    func save(context: NSManagedObjectContext) throws {
-        let jsonAddress = try JSONEncoder().encode(address)
-        let addressString = String(data: jsonAddress, encoding: .utf8)!
-        
-        let entity = CustomerServiceEmployeeEntity(context: context)
-        entity.name = name
-        entity.surname = surname
-        entity.birthDate = birthDate
-        entity.address = addressString
-        entity.email = email
-        entity.phone = phone
-        entity.employmentDate = employmentDate
-        entity.baseSalary = baseSalary as NSDecimalNumber
-        entity.totalOrders = totalOrders
-        entity.staticBonusPerOrder = Self.bonusPerOrder
-        context.insert(entity)
-        try context.save()
-    }
+    /// Calculate the salary of this employee increased by the bonus
+    /// - Returns: Decimal total salary value
+    public func calculateSalary() -> Decimal { employee!.baseSalary! as Decimal + totalBonus }
 }

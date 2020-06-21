@@ -9,66 +9,129 @@
 import Foundation
 import CoreData
 
-final class Customer: Person, IncludingPersistentExtension {
-    typealias EntityType = CustomerEntity
+@objc(Customer)
+public class Customer: NSManagedObject, Manageable {
     
-    static var all = PersistentClassExtension<Customer>()
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Customer> {
+        return NSFetchRequest<Customer>(entityName: "Customer")
+    }
     
-    let name: String
-    let surname: String
-    let birthDate: Date
-    var address: Address
-    var email: String
-    var phone: String
-    let registrationDate: Date
-    let discount: Double
+    public static var all: [Customer] = []
     
-    init(name: String, surname: String, birthDate: Date, address: Address, email: String, phone: String, registrationDate: Date, discount: Double) {
-        self.name = name
-        self.surname = surname
-        self.birthDate = birthDate
-        self.address = address
-        self.email = email
-        self.phone = phone
+    // MARK: - Attributes
+    
+    private static var renting: [Customer] = []
+    
+    @NSManaged var discount: Float
+    @NSManaged var registrationDate: Date?
+    @NSManaged private var isRenting: Bool
+    
+    @NSManaged var person: Person?
+    @NSManaged var rentals: Set<Rental>?
+
+    // MARK: - CoreData helpers
+    
+    @objc(addRentalsObject:)
+    @NSManaged public func addToRentals(_ value: Rental)
+    
+    @objc(removeRentalsObject:)
+    @NSManaged public func removeFromRentals(_ value: Rental)
+    
+    @objc(addRentals:)
+    @NSManaged public func addToRentals(_ values: Set<Rental>)
+    
+    @objc(removeRentals:)
+    @NSManaged public func removeFromRentals(_ values: Set<Rental>)
+    
+    // MARK: - Initializers
+    
+    // Loader initializer
+    @objc
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    public init(context: NSManagedObjectContext, registrationDate: Date, discount: Float) {
+        let description = NSEntityDescription.entity(forEntityName: "Customer", in: context)!
+        super.init(entity: description, insertInto: context)
+        addToAll()
+        
         self.registrationDate = registrationDate
         self.discount = discount
-        Customer.all.add(object: self)
     }
     
-    required convenience init(from object: NSManagedObject) throws {
-        let entity = object as! EntityType
-        let addressString = try JSONDecoder().decode(Address.self, from: entity.address!.data(using: .utf8)!)
+    // MARK: - Helpers
+    
+    public static func fillRenting() {
+        for cust in Customer.all {
+            if cust.isRenting {
+                Customer.renting.append(cust)
+            }
+        }
+    }
+    
+    public func delete(context: NSManagedObjectContext) {
+        self.removeFromAll()
+        self.removeFromRenting()
+        for rental in rentals! {
+            rental.removeFromAll()
+        }
+                
+        context.delete(self)
         
-        self.init(name: entity.name!, surname: entity.surname!, birthDate: entity.birthDate!, address: addressString, email: entity.email!, phone: entity.phone!, registrationDate: entity.registrationDate!, discount: entity.discount)
+        do {
+            try context.save()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
     }
     
-    deinit {
-        Customer.all.remove(object: self)
+    // MARK: - Business logic
+    
+    /// List all customers that are currently renting a vehicle
+    /// - Returns: List of renting customers
+    public static func listRentingCustomers() -> [Customer] {
+        return renting
     }
     
-    func rentVehicle() {
-        // TODO(mDevv): Implement me.
-    }
-    
-    static func listRentingCustomers() {
-        // TODO(mDevv): Implement me.
-    }
-    
-    func save(context: NSManagedObjectContext) throws {
-        let encoder = JSONEncoder()
-        let jsonAddress = try encoder.encode(address)
-        let addressString = String(data: jsonAddress, encoding: .utf8)!
+    /// Create a new vehicle reservation by creating a Rental object related to the vehicle and the customer
+    /// - Parameters:
+    ///   - context: Managed DB context
+    ///   - vehicle: Reserved vehicle
+    ///   - startDate: The first day of rental
+    ///   - endDate: The last day of rental
+    /// - Returns: Unique reservation code related to the created Rental
+    public func bookVehicle(context: NSManagedObjectContext, vehicle: Vehicle, startDate: Date, endDate: Date) -> String {
+        let uniqueCode = Rental.createUniqueCode()
         
-        let entity = CustomerEntity(context: context)
-        entity.name = name
-        entity.surname = surname
-        entity.birthDate = birthDate
-        entity.address = addressString
-        entity.email = email
-        entity.phone = phone
-        entity.registrationDate = registrationDate
-        entity.discount = discount
-        context.insert(entity)
-        try context.save()
+        let _ = Rental(context: context,
+                       customer: self,
+                       vehicle: vehicle,
+                       reservationCode: uniqueCode,
+                       rentDate: startDate,
+                       returnDate: endDate)
+        
+        return uniqueCode
     }
+    
+    /// Add this customer to the list of currently renting ones
+    public func addToRenting() {
+        self.isRenting = true
+        Customer.renting.append(self)
+    }
+    
+    /// Remove this customer from the list of currently renting ones
+    public func removeFromRenting() {
+        self.isRenting = false
+        if let index = Customer.renting.firstIndex(of: self) {
+            Customer.renting.remove(at: index)
+        }
+    }
+    
+    /// Update customer's personal information in the system
+    public func updateInformation() {
+        // TODO(mDevv): Implement me
+    }
+    
 }

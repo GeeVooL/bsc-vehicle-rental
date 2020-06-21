@@ -9,34 +9,54 @@
 import Foundation
 import CoreData
 
-final class Service: IncludingPersistentExtension {
-    typealias EntityType = ServiceEntity
+@objc(Service)
+public class Service: NSManagedObject, Manageable {
     
-    static var all = PersistentClassExtension<Service>()
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Service> {
+        return NSFetchRequest<Service>(entityName: "Service")
+    }
     
-    let serviceDate: Date
-    let issueDescription: String
+    public static var all: [Service] = []
     
-    init(serviceDate: Date, issueDescription: String) {
+    // MARK: - Attributes
+    
+    @NSManaged var issueDescription: String?
+    @NSManaged var serviceDate: Date?
+    
+    @NSManaged var technician: Technician?
+    @NSManaged var vehicle: Vehicle?
+    @NSManaged var invoice: Invoice?
+    
+    // MARK: - Initializers
+    
+    // Loader initializer
+    @objc
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    public init(context: NSManagedObjectContext,
+         technician: Technician,
+         vehicle: Vehicle,
+         serviceDate: Date,
+         issueDescription: String
+    ) {
+        let description = NSEntityDescription.entity(forEntityName: "Service", in: context)!
+        super.init(entity: description, insertInto: context)
+        addToAll()
+        
+        self.technician = technician
+        self.vehicle = vehicle
+        
         self.serviceDate = serviceDate
         self.issueDescription = issueDescription
-        Service.all.add(object: self)
     }
     
-    required convenience init(from object: NSManagedObject) throws {
-        let entity = object as! EntityType
-        self.init(serviceDate: entity.serviceDate!, issueDescription: entity.issueDescription!)
+    // MARK: - Business logic
+    
+    /// Create an Invoice related to this Service
+    public func issueInvoice() {
+        // TODO(mDevv): Implement me
     }
     
-    deinit {
-        Service.all.remove(object: self)
-    }
-    
-    func save(context: NSManagedObjectContext) throws {
-        let entity = ServiceEntity(context: context)
-        entity.serviceDate = serviceDate
-        entity.issueDescription = issueDescription
-        context.insert(entity)
-        try context.save()
-    }
 }
