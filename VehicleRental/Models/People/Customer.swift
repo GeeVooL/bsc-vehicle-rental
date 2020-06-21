@@ -22,12 +22,12 @@ public class Customer: NSManagedObject, Manageable {
     
     private static var renting: [Customer] = []
     
-    @NSManaged var discount: Float
-    @NSManaged var registrationDate: Date?
+    @NSManaged private var discount: Float
+    @NSManaged private var registrationDate: Date?
     @NSManaged private var isRenting: Bool
     
-    @NSManaged var person: Person?
-    @NSManaged var rentals: Set<Rental>?
+    @NSManaged private var person: Person?
+    @NSManaged private var rentals: Set<Rental>?
 
     // MARK: - CoreData helpers
     
@@ -51,10 +51,12 @@ public class Customer: NSManagedObject, Manageable {
         super.init(entity: entity, insertInto: context)
     }
     
-    public init(context: NSManagedObjectContext, registrationDate: Date, discount: Float) {
+    public init(context: NSManagedObjectContext, person: Person, registrationDate: Date, discount: Float) {
         let description = NSEntityDescription.entity(forEntityName: "Customer", in: context)!
         super.init(entity: description, insertInto: context)
         addToAll()
+        
+        self.person = person
         
         self.registrationDate = registrationDate
         self.discount = discount
@@ -85,6 +87,28 @@ public class Customer: NSManagedObject, Manageable {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+    }
+    
+    // MARK: - Getters and setters
+    
+    public func getPerson() -> Person {
+        return self.person!
+    }
+    
+    public func getRentals() -> Set<Rental> {
+        return self.rentals!
+    }
+    
+    public func getRegistrationDate() -> Date {
+        return self.registrationDate!
+    }
+    
+    public func getDiscount() -> Float {
+        return self.discount
+    }
+    
+    public func setDiscount(discount: Float) {
+        self.discount = discount
     }
     
     // MARK: - Business logic

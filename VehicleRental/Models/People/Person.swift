@@ -20,14 +20,14 @@ public class Person: NSManagedObject, Manageable {
     
     // MARK: - Attributes
     
-    @NSManaged var birthDate: Date?
-    @NSManaged var email: String?
-    @NSManaged var name: String?
-    @NSManaged var phone: String?
-    @NSManaged var surname: String?
+    @NSManaged private var birthDate: Date?
+    @NSManaged private var email: String?
+    @NSManaged private var name: String?
+    @NSManaged private var phone: String?
+    @NSManaged private var surname: String?
     
-    @NSManaged var customer: Customer?
-    @NSManaged var employee: Employee?
+    @NSManaged private var customer: Customer?
+    @NSManaged private var employee: Employee?
     @NSManaged private var address: Address?
     
     // MARK: - Initializers
@@ -95,18 +95,18 @@ public class Person: NSManagedObject, Manageable {
         if let customer = self.customer {
             customer.removeFromAll()
             customer.removeFromRenting()
-            for rental in customer.rentals! {
+            for rental in customer.getRentals() {
                 rental.removeFromAll()
             }
         }
         self.employee?.removeFromAll()
-        if let technician = self.employee?.technician {
+        if let technician = self.employee?.getTechnician()! {
             technician.removeFromAll()
-            for service in technician.services! {
+            for service in technician.getServices() {
                 service.removeFromAll()
             }
         }
-        self.employee?.customerServiceEmployee?.removeFromAll()
+        self.employee?.getCustomerServiceEmployee()?.removeFromAll()
         
         context.delete(self)
         
@@ -125,7 +125,7 @@ public class Person: NSManagedObject, Manageable {
     ///   - registrationDate: The date of customer's registration in the system
     public func addCustomerRole(context: NSManagedObjectContext, discount: Float, registrationDate: Date) {
         if customer == nil {
-            self.customer = Customer(context: context, registrationDate: registrationDate, discount: discount)
+            let _ = Customer(context: context, person: self, registrationDate: registrationDate, discount: discount)
         }
     }
     
@@ -136,8 +136,53 @@ public class Person: NSManagedObject, Manageable {
     ///   - employmentDate: The date the employee was hired
     public func addEmployeeRole(context: NSManagedObjectContext, baseSalary: Decimal, employmentDate: Date) {
         if employee == nil {
-            self.employee = Employee(context: context, baseSalary: baseSalary, employmentDate: employmentDate)
+            let _ = Employee(context: context, person: self, baseSalary: baseSalary, employmentDate: employmentDate)
         }
     }
     
+    // MARK: - Getters and setters
+    
+    public func getName() -> String {
+        return self.name!
+    }
+    
+    public func getSurname() -> String {
+        return self.surname!
+    }
+    
+    public func getBirthDate() -> Date {
+        return self.birthDate!
+    }
+    
+    public func getAddress() -> Address {
+        return self.address!
+    }
+    
+    public func setAddress(address: Address) {
+        self.address = address
+    }
+    
+    public func getEmail() -> String {
+        return self.email!
+    }
+    
+    public func setEmail(email: String) {
+        self.email = email
+    }
+    
+    public func getPhone() -> String {
+        return self.phone!
+    }
+    
+    public func setPhone(phone: String) {
+        self.phone = phone
+    }
+    
+    public func getCustomer() -> Customer? {
+        return self.customer
+    }
+    
+    public func getEmployee() -> Employee? {
+        return self.employee
+    }
 }

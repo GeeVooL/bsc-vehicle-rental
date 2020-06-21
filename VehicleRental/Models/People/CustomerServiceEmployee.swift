@@ -20,13 +20,13 @@ public class CustomerServiceEmployee: NSManagedObject, Manageable {
     
     // MARK: - Attributes
     
-    static let bonusPerOrder: Float = 0.05
-    @NSManaged var totalOrders: Int32
+    public static let bonusPerOrder: Float = 0.05
+    @NSManaged private var totalOrders: Int32
     
-    @NSManaged var employee: Employee?
+    @NSManaged private var employee: Employee?
     
-    var totalBonus: Decimal {
-        employee!.baseSalary! as Decimal * Decimal(Double(CustomerServiceEmployee.bonusPerOrder)) * Decimal(totalOrders)
+    private var totalBonus: Decimal {
+        employee!.getBaseSalary() as Decimal * Decimal(Double(CustomerServiceEmployee.bonusPerOrder)) * Decimal(totalOrders)
     }
     
     // MARK: - Initializers
@@ -38,17 +38,38 @@ public class CustomerServiceEmployee: NSManagedObject, Manageable {
     }
     
     public init(context: NSManagedObjectContext,
-         totalOrders: Int32) {
+                employee: Employee,
+                totalOrders: Int32) {
         let description = NSEntityDescription.entity(forEntityName: "CustomerServiceEmployee", in: context)!
         super.init(entity: description, insertInto: context)
         addToAll()
         
+        self.employee = employee
+        
         self.totalOrders = totalOrders
+    }
+    
+    // MARK: - Getters and setters
+    
+    public func getEmployee() -> Employee {
+        return self.employee!
+    }
+    
+    public func getTotalOrders() -> Int32 {
+        return self.totalOrders
+    }
+    
+    public func setTotalOrders(totalOrders: Int32) {
+        self.totalOrders = totalOrders
+    }
+    
+    public func getTotalBonus() -> Decimal {
+        return self.totalBonus
     }
     
     // MARK: - Business logic
     
     /// Calculate the salary of this employee increased by the bonus
     /// - Returns: Decimal total salary value
-    public func calculateSalary() -> Decimal { employee!.baseSalary! as Decimal + totalBonus }
+    public func calculateSalary() -> Decimal { employee!.getBaseSalary() as Decimal + totalBonus }
 }

@@ -27,10 +27,10 @@ public class Technician: NSManagedObject, Manageable {
     
     // MARK: - Attributes
     
-    @NSManaged var specialization: TechnicianSpecialization
+    @NSManaged private var specialization: TechnicianSpecialization
     
-    @NSManaged var employee: Employee?
-    @NSManaged var services: Set<Service>?
+    @NSManaged private var employee: Employee?
+    @NSManaged private var services: Set<Service>?
     
     // MARK: - CoreData helpers
     
@@ -54,10 +54,14 @@ public class Technician: NSManagedObject, Manageable {
         super.init(entity: entity, insertInto: context)
     }
     
-    public init(context: NSManagedObjectContext, specialization: TechnicianSpecialization) {
+    public init(context: NSManagedObjectContext,
+                employee: Employee,
+                specialization: TechnicianSpecialization) {
         let description = NSEntityDescription.entity(forEntityName: "Technician", in: context)!
         super.init(entity: description, insertInto: context)
         addToAll()
+        
+        self.employee = employee
         
         self.specialization = specialization
     }
@@ -78,6 +82,24 @@ public class Technician: NSManagedObject, Manageable {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+    }
+    
+    // MARK: - Getters and setters
+    
+    public func getEmployee() -> Employee {
+        return self.employee!
+    }
+    
+    public func getServices() -> Set<Service> {
+        return self.services!
+    }
+    
+    public func getSpecialization() -> TechnicianSpecialization {
+        return self.specialization
+    }
+    
+    public func setSpecialization(specialization: TechnicianSpecialization) {
+        self.specialization = specialization
     }
     
     // MARK: - Business logic
